@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프리미엄 위젯</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080d;--card:#101018;--border:#1c1c2e;--t1:#e8e8f0;--t2:#8888a8;--t3:#555570;--green:#00d68f;--red:#ff3d71;--cyan:#00cfff;--purple:#9966ff;--orange:#f0a030}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t1);font-family:'Noto Sans KR',sans-serif;scrollbar-width:none;-ms-overflow-style:none}
+body::-webkit-scrollbar{display:none}
+a{text-decoration:none;color:inherit}
+
+.wrap{padding:12px;max-width:600px;margin:0 auto}
+
+/* BTC Summary */
+.btc-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+.btc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;cursor:pointer;transition:border-color .2s}
+.btc-card:hover{border-color:#2a2a45}
+.btc-card .label{font-size:10px;color:var(--t3);text-transform:uppercase;margin-bottom:2px}
+.btc-card .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px}
+.btc-card .sub{font-size:9px;color:var(--t3);margin-top:2px}
+.pos{color:var(--green)}.neg{color:var(--red)}
+
+/* Top 5 */
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:border-color .2s}
+.box:hover{border-color:#2a2a45}
+.box h3{font-size:11px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.box.prem h3{color:var(--green)}
+.box.disc h3{color:var(--red)}
+.item{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1c1c2e60;font-size:12px}
+.item:last-child{border-bottom:none}
+.item .left{display:flex;align-items:center;gap:6px}
+.item img{width:16px;height:16px;border-radius:50%}
+.item .sym{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px}
+.item .pct{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px}
+.item .src{font-size:9px;color:var(--t3);margin-left:2px}
+.prem .pct{color:var(--green)}
+.disc .pct{color:var(--red)}
+
+.more{text-align:center;font-size:10px;color:var(--t3);padding:4px 0}
+.more span{color:var(--cyan);font-weight:500}
+
+@media(max-width:400px){.boxes{grid-template-columns:1fr}.btc-bar{grid-template-columns:1fr}.btc-card .val{font-size:14px}}
+</style>
+</head>
+<body>
+<a href="https://herdvibe.com/60" target="_top">
+<div class="wrap">
+  <div class="btc-bar" id="btcBar">
+    <div class="btc-card"><div class="label">USD/KRW</div><div class="val" id="wRate">···</div><div class="sub">실시간 역산</div></div>
+    <div class="btc-card"><div class="label">BTC 김치프리미엄</div><div class="val" id="wKimchi">···</div><div class="sub">업비트 vs Binance</div></div>
+    <div class="btc-card"><div class="label">BTC 코베프리미엄</div><div class="val" id="wCB">···</div><div class="sub">Coinbase vs Binance</div></div>
+  </div>
+  <div class="boxes">
+    <div class="box prem"><h3>🔺 프리미엄 TOP 5</h3><div id="topList">로딩 중...</div></div>
+    <div class="box disc"><h3>🔻 디스카운트 TOP 5</h3><div id="botList">로딩 중...</div></div>
+  </div>
+  <div class="more">클릭하면 <span>전체 대시보드</span>에서 확인 →</div>
+</div>
+</a>
+
+<script>
+const fmtPct=(v)=>(v>0?'+':'')+v.toFixed(2)+'%';
+const pCls=(v)=>v>0?'pos':'neg';
+
+async function load(){
+  try{
+    // Fetch all in parallel
+    const [bnR,upMR,btR,cbR]=await Promise.all([
+      fetch('https://api.binance.com/api/v3/ticker/price'),
+      fetch('https://api.upbit.com/v1/market/all?isDetails=false'),
+      fetch('https://api.bithumb.com/public/ticker/ALL_KRW'),
+      fetch('https://api.coinbase.com/v2/exchange-rates?currency=USD')
+    ]);
+
+    // Binance
+    const bnData=await bnR.json();
+    const bn={};
+    bnData.forEach(t=>{if(t.symbol.endsWith('USDT'))bn[t.symbol.replace('USDT','')]=+t.price;});
+
+    // Upbit
+    const upMarkets=await upMR.json();
+    const krwM=upMarkets.filter(m=>m.market.startsWith('KRW-')).map(m=>m.market);
+    const up={};
+    for(let i=0;i<krwM.length;i+=100){
+      const batch=krwM.slice(i,i+100).join(',');
+      const r=await fetch(`https://api.upbit.com/v1/ticker?markets=${batch}`);
+      if(r.ok){const d=await r.json();d.forEach(t=>{up[t.market.replace('KRW-','')]=+t.trade_price;});}
+      if(i+100<krwM.length)await new Promise(r=>setTimeout(r,200));
+    }
+
+    // Bithumb
+    const btData=await btR.json();
+    const bt={};
+    if(btData.status==='0000'){
+      for(const[s,info]of Object.entries(btData.data)){
+        if(s!=='date'){const p=+info.closing_price;if(p>0)bt[s]=p;}
+      }
+    }
+
+    // Coinbase
+    const cbData=await cbR.json();
+    const cb={};
+    for(const[coin,rate]of Object.entries(cbData.data?.rates||{})){
+      const v=+rate;if(v>0)cb[coin.toUpperCase()]=1/v;
+    }
+
+    // Exchange rate
+    const usdKrw=(up['BTC']&&bn['BTC'])?up['BTC']/bn['BTC']:1450;
+    document.getElementById('wRate').textContent=usdKrw.toFixed(0)+'원';
+
+    // BTC premiums
+    if(bn['BTC']){
+      if(up['BTC']){
+        const kimchi=((up['BTC']/usdKrw)-bn['BTC'])/bn['BTC']*100;
+        const el=document.getElementById('wKimchi');
+        el.textContent=fmtPct(kimchi);el.className='val '+pCls(kimchi);
+      }
+      if(cb['BTC']){
+        const cbp=(cb['BTC']-bn['BTC'])/bn['BTC']*100;
+        const el=document.getElementById('wCB');
+        el.textContent=fmtPct(cbp);el.className='val '+pCls(cbp);
+      }
+    }
+
+    // Load coin meta
+    let meta={};
+    try{
+      const mr=await fetch('data/coins.json');
+      const md=await mr.json();
+      md.coins?.forEach(c=>{meta[c.symbol]={image:c.image,name:c.name};});
+    }catch(e){}
+
+    // Calculate all premiums
+    const results=[];
+    for(const sym of Object.keys(bn)){
+      const bnP=bn[sym];if(!bnP)continue;
+      const upK=up[sym],btK=bt[sym],cbU=cb[sym];
+      if(!upK&&!btK&&!cbU)continue;
+
+      const entry={symbol:sym,image:meta[sym]?.image||''};
+      const vals=[];
+      if(upK&&usdKrw){entry.up=((upK/usdKrw)-bnP)/bnP*100;vals.push({v:entry.up,src:'업'});}
+      if(btK&&usdKrw){entry.bt=((btK/usdKrw)-bnP)/bnP*100;vals.push({v:entry.bt,src:'빗'});}
+      if(cbU){entry.cb=(cbU-bnP)/bnP*100;vals.push({v:entry.cb,src:'CB'});}
+
+      if(vals.length){
+        vals.sort((a,b)=>b.v-a.v);
+        entry.maxV=vals[0].v;entry.maxSrc=vals[0].src;
+        entry.minV=vals[vals.length-1].v;entry.minSrc=vals[vals.length-1].src;
+        results.push(entry);
+      }
+    }
+
+    results.sort((a,b)=>b.maxV-a.maxV);
+    const top5=results.slice(0,5);
+    const bot5=results.slice(-5).reverse();
+
+    document.getElementById('topList').innerHTML=top5.map(c=>
+      `<div class="item"><div class="left"><img src="${c.image}" onerror="this.style.display='none'"><span class="sym">${c.symbol}</span></div><span class="pct">${fmtPct(c.maxV)}<span class="src">${c.maxSrc}</span></span></div>`
+    ).join('');
+
+    document.getElementById('botList').innerHTML=bot5.map(c=>
+      `<div class="item"><div class="left"><img src="${c.image}" onerror="this.style.display='none'"><span class="sym">${c.symbol}</span></div><span class="pct">${fmtPct(c.minV)}<span class="src">${c.minSrc}</span></span></div>`
+    ).join('');
+
+  }catch(e){
+    console.error(e);
+    document.getElementById('topList').textContent='로딩 실패';
+    document.getElementById('botList').textContent='로딩 실패';
+  }
+}
+load();
+
+function postHeight(){const h=document.documentElement.scrollHeight;window.parent.postMessage({type:'resize',height:h},'*');window.parent.postMessage({height:h},'*');}
+new ResizeObserver(()=>postHeight()).observe(document.body);
+window.addEventListener('load',()=>setTimeout(postHeight,300));
+</script>
+</body>
+</html>

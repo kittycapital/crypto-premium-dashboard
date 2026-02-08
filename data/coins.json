@@ -1,0 +1,16 @@
+{
+  "updated_at": "2026-02-08T15:00:00Z",
+  "usd_krw": 1452.3,
+  "coins": [
+    {"symbol":"BTC","name":"Bitcoin","image":"https://assets.coingecko.com/coins/images/1/small/bitcoin.png","market_cap_rank":1,"reference_usd":97250,"upbit_krw":142500000,"upbit_premium":0.85,"bithumb_krw":142300000,"bithumb_premium":0.71},
+    {"symbol":"ETH","name":"Ethereum","image":"https://assets.coingecko.com/coins/images/279/small/ethereum.png","market_cap_rank":2,"reference_usd":2680,"upbit_krw":3935000,"upbit_premium":1.12,"bithumb_krw":3930000,"bithumb_premium":0.99},
+    {"symbol":"XRP","name":"XRP","image":"https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png","market_cap_rank":3,"reference_usd":2.42,"upbit_krw":3620,"upbit_premium":2.95,"bithumb_krw":3610,"bithumb_premium":2.67},
+    {"symbol":"SOL","name":"Solana","image":"https://assets.coingecko.com/coins/images/4128/small/solana.png","market_cap_rank":4,"reference_usd":195.5,"upbit_krw":287000,"upbit_premium":1.05,"bithumb_krw":286500,"bithumb_premium":0.88},
+    {"symbol":"BNB","name":"BNB","image":"https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png","market_cap_rank":5,"reference_usd":585},
+    {"symbol":"DOGE","name":"Dogecoin","image":"https://assets.coingecko.com/coins/images/5/small/dogecoin.png","market_cap_rank":6,"reference_usd":0.252,"upbit_krw":378,"upbit_premium":3.21,"bithumb_krw":376,"bithumb_premium":2.67},
+    {"symbol":"ADA","name":"Cardano","image":"https://assets.coingecko.com/coins/images/975/small/cardano.png","market_cap_rank":7,"reference_usd":0.78,"upbit_krw":1155,"upbit_premium":1.89,"bithumb_krw":1150,"bithumb_premium":1.46},
+    {"symbol":"AVAX","name":"Avalanche","image":"https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png","market_cap_rank":12,"reference_usd":25.8,"upbit_krw":37900,"upbit_premium":1.15,"bithumb_krw":37800,"bithumb_premium":0.88},
+    {"symbol":"LINK","name":"Chainlink","image":"https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png","market_cap_rank":11,"reference_usd":18.5,"upbit_krw":27200,"upbit_premium":1.22,"bithumb_krw":27100,"bithumb_premium":0.85},
+    {"symbol":"DOT","name":"Polkadot","image":"https://assets.coingecko.com/coins/images/12171/small/polkadot.png","market_cap_rank":14,"reference_usd":5.12,"upbit_krw":7550,"upbit_premium":1.48,"bithumb_krw":7520,"bithumb_premium":1.07}
+  ]
+}
