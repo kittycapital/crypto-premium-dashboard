@@ -17,6 +17,7 @@
 body{background:var(--bg);color:var(--t1);font-family:'Noto Sans KR',sans-serif;line-height:1.6;scrollbar-width:none;-ms-overflow-style:none}
 body::-webkit-scrollbar{display:none}
 
+/* Header */
 .header{padding:24px 28px 16px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0c0c14,var(--bg))}
 .header-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
@@ -24,9 +25,9 @@ body::-webkit-scrollbar{display:none}
 .dot{width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block;margin-right:4px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-.rate-bar{display:flex;gap:16px;margin-top:8px;font-size:12px;flex-wrap:wrap;align-items:center}
-.rate-item{display:flex;align-items:center;gap:4px;color:var(--t2)}
-.rate-val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--t1)}
+.rate-bar{display:flex;gap:20px;margin-top:10px;font-size:13px;flex-wrap:wrap;align-items:center}
+.rate-item{display:flex;align-items:center;gap:6px;color:var(--t2)}
+.rate-val{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--t1);font-size:14px}
 .ok{color:var(--green)}.ld{color:var(--orange)}.fl{color:var(--red)}
 .status-bar{display:flex;gap:14px;margin-top:6px;font-size:10px;color:var(--t3);flex-wrap:wrap}
 
@@ -38,49 +39,70 @@ body::-webkit-scrollbar{display:none}
 
 .dashboard{max-width:1400px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:16px}
 
+/* ─── Signal Banner ─── */
 .sig-banner{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.sig-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;overflow:hidden}
-.sig-box h3{font-size:12px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sig-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;overflow:hidden}
+.sig-box h3{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px}
 .sig-box.prem h3{color:var(--green)}
 .sig-box.disc h3{color:var(--red)}
-.sig-item{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;cursor:pointer}
-.sig-item:last-child{border-bottom:none}
-.sig-item:hover{background:var(--elev)}
-.sig-item .ci{display:flex;align-items:center;gap:8px}
-.sig-item .ci img{width:20px;height:20px;border-radius:50%}
-.sig-item .cs{font-family:'JetBrains Mono',monospace;font-weight:600}
-.sig-item .vals{display:flex;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px}
-.v-up{color:var(--cyan)}.v-bt{color:var(--purple)}.v-cb{color:var(--orange)}
 
+.sig-item{padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.sig-item:last-child{border-bottom:none}
+.sig-item:hover{background:var(--elev);margin:0 -20px;padding:10px 20px}
+.sig-row1{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.sig-row1 img{width:22px;height:22px;border-radius:50%}
+.sig-row1 .sym{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px}
+.sig-row2{display:flex;gap:16px;padding-left:30px;font-size:13px}
+.sig-row2 .ex{color:var(--t3);font-size:11px;margin-right:2px}
+.sig-row2 .val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px}
+.pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--t3)}
+
+/* ─── Table ─── */
 .section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px}
-.stitle{font-size:14px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.stitle{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
 .ssub{font-size:11px;color:var(--t3);margin-bottom:14px}
 .twrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .twrap::-webkit-scrollbar{height:4px}
 .twrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 
-.ctable{width:100%;border-collapse:collapse;font-size:13px;min-width:900px}
-.ctable th{padding:8px 10px;font-size:10px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}
-.ctable th:first-child,.ctable th:nth-child(2){text-align:left}
-.ctable th:hover{color:var(--t2)}.ctable th.sorted{color:var(--blue)}
-.ctable td{padding:10px;border-bottom:1px solid var(--border);text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap;color:var(--t1)}
-.ctable td:first-child{text-align:center;color:var(--t3);font-size:11px;width:30px}
+.ctable{width:100%;border-collapse:collapse;min-width:680px}
+.ctable th{
+  padding:10px 12px;font-size:12px;font-weight:600;color:var(--t2);
+  letter-spacing:.3px;border-bottom:1px solid var(--border);
+  text-align:right;white-space:nowrap;cursor:pointer;user-select:none;
+}
+.ctable th:first-child{text-align:center;width:40px}
+.ctable th:nth-child(2){text-align:left}
+.ctable th:hover{color:var(--t1)}.ctable th.sorted{color:var(--blue)}
+
+.ctable td{
+  padding:12px;border-bottom:1px solid var(--border);
+  text-align:right;font-family:'JetBrains Mono',monospace;
+  font-size:14px;white-space:nowrap;color:var(--t1);
+}
+.ctable td:first-child{text-align:center;color:var(--t3);font-size:12px;width:40px}
 .ctable td:nth-child(2){text-align:left;font-family:'Noto Sans KR',sans-serif}
 .ctable tr:hover td{background:var(--elev)}.ctable tr{cursor:pointer}
-.cc{display:flex;align-items:center;gap:8px}
-.cc img{width:22px;height:22px;border-radius:50%}
-.cc .sym{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;color:var(--t1)}
-.cc .nm{color:var(--t2);font-size:11px;margin-left:4px}
-.pos{color:var(--green)}.neg{color:var(--red)}.lc{color:var(--t3);font-size:11px;font-style:italic}
 
+.cc{display:flex;align-items:center;gap:10px}
+.cc img{width:24px;height:24px;border-radius:50%}
+.cc .sym{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--t1)}
+.cc .nm{color:var(--t2);font-size:12px;margin-left:4px}
+
+.prem-cell{font-weight:600;font-size:14px}
+.prem-cell.pos{color:var(--green)}
+.prem-cell.neg{color:var(--red)}
+.lc{color:var(--t3);font-size:12px;font-style:italic;font-weight:400}
+
+/* ─── Chart ─── */
 .chart-box{position:relative;width:100%;height:320px}
 .dh{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px}
 .dc{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700}
 .dc img{width:28px;height:28px;border-radius:50%}
-.ds{display:flex;gap:16px;font-size:12px}
+.ds{display:flex;gap:20px;font-size:13px}
 .ds .st{display:flex;flex-direction:column;align-items:center}
-.ds .sl{font-size:10px;color:var(--t3);text-transform:uppercase}
-.ds .sv{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px}
+.ds .sl{font-size:11px;color:var(--t3)}
+.ds .sv{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:15px}
 
 .footer{text-align:center;padding:20px;font-size:10px;color:var(--t3);border-top:1px solid var(--border)}
 .loading{display:flex;align-items:center;justify-content:center;height:200px;color:var(--t3);font-size:14px}
@@ -93,9 +115,13 @@ body::-webkit-scrollbar{display:none}
   .chart-box{height:260px}.sig-banner{grid-template-columns:1fr}
 }
 @media(max-width:500px){
-  .header h1{font-size:17px}.ctable{font-size:11px}
+  .header h1{font-size:17px}
+  .ctable td{font-size:13px;padding:10px 8px}
+  .ctable th{font-size:11px;padding:8px}
   .pbtn{padding:8px 14px;font-size:13px}.chart-box{height:230px}
-  .dc{font-size:16px}.ds .sv{font-size:12px}
+  .dc{font-size:16px}.ds .sv{font-size:13px}
+  .sig-row2{gap:10px;font-size:12px}
+  .rate-bar{font-size:12px}
 }
 </style>
 </head>
@@ -112,7 +138,7 @@ body::-webkit-scrollbar{display:none}
   <div class="rate-bar">
     <div class="rate-item">USD/KRW: <span class="rate-val" id="rateDisplay">-</span></div>
     <div class="rate-item">BTC 김치: <span class="rate-val" id="btcKimchi">-</span></div>
-    <div class="rate-item">BTC 코베: <span class="rate-val" id="btcCB">-</span></div>
+    <div class="rate-item">BTC 코인베이스: <span class="rate-val" id="btcCB">-</span></div>
   </div>
   <div class="status-bar">
     <span>서버 데이터: <span id="sServer" class="ld">···</span></span>
@@ -129,13 +155,15 @@ body::-webkit-scrollbar{display:none}
   <div class="sig-banner" id="sigBanner">
     <div class="loading"><div class="spinner"></div>데이터 로딩 중...</div>
   </div>
+
   <div class="section">
     <div class="stitle">📋 전체 코인 프리미엄</div>
-    <div class="ssub">기준: Binance USDT (실시간) · 업비트/빗썸/Coinbase (서버 30분) · 프리미엄 (%)</div>
+    <div class="ssub">기준: Binance USDT (실시간) · 프리미엄 = (거래소 가격 − Binance) / Binance × 100</div>
     <div class="twrap" id="tableWrap">
       <div class="loading"><div class="spinner"></div>데이터 로딩 중...</div>
     </div>
   </div>
+
   <div class="section" id="chartSection" style="display:none">
     <div class="dh" id="chartHeader"></div>
     <div class="chart-box" id="chartBox"><canvas id="mainChart"></canvas></div>
@@ -143,21 +171,20 @@ body::-webkit-scrollbar{display:none}
 </div>
 
 <div class="footer">
-  기준가: Binance USDT (브라우저 실시간) · 업비트/빗썸 KRW (서버) · Coinbase USD (서버) · 투자 조언이 아닙니다
+  기준가: Binance USDT (실시간) · 업비트/빗썸 KRW (서버 30분) · 코인베이스 USD (서버 30분) · 투자 조언이 아닙니다
 </div>
 
 <script>
 const isMobile=window.innerWidth<=600;
-let serverCoins=[];    // from coins.json
-let usdKrw=0;          // from server
-let binancePrices={};  // client-side
-let premiums=[];       // calculated
-let historyData=[];    // from server
+let serverCoins=[];
+let usdKrw=0;
+let binancePrices={};
+let premiums=[];
+let historyData=[];
 let selectedCoin=null;
 let mainChart=null;
-let sortState={col:'max_prem',dir:'desc'};
+let sortState={col:'rank',dir:'asc'};
 let refreshTimer=30;
-let binanceDone=false;
 
 if(typeof Chart!=='undefined'){
   Chart.defaults.color='#8888a8';Chart.defaults.borderColor='#1c1c2e';
@@ -165,10 +192,9 @@ if(typeof Chart!=='undefined'){
   Chart.defaults.font.size=isMobile?10:11;
 }
 
-const fmtKRW=v=>v>=1000?'₩'+v.toLocaleString('ko-KR',{maximumFractionDigits:0}):v>=1?'₩'+v.toFixed(2):'₩'+v.toFixed(4);
 const fmtUSD=v=>v>=1000?'$'+v.toLocaleString('en-US',{maximumFractionDigits:0}):v>=1?'$'+v.toFixed(2):v>=0.01?'$'+v.toFixed(4):'$'+v.toFixed(6);
 const fmtPct=v=>v!=null?(v>0?'+':'')+v.toFixed(2)+'%':'—';
-const pCls=v=>v>0?'pos':v<0?'neg':'';
+const pCls=v=>v>0?'pos':v<0?'neg':'neu';
 
 // ─── Load server data ────────────────────────────
 async function loadServerData(){
@@ -179,7 +205,7 @@ async function loadServerData(){
     usdKrw=d.usd_krw||1450;
     document.getElementById('sServer').textContent=`✓ ${serverCoins.length}개 · ${new Date(d.updated_at).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit'})}`;
     document.getElementById('sServer').className='ok';
-    document.getElementById('rateDisplay').textContent=usdKrw.toFixed(1)+'원';
+    document.getElementById('rateDisplay').textContent=usdKrw.toFixed(0)+'원';
     return true;
   }catch(e){
     document.getElementById('sServer').textContent='✗ 실패';
@@ -188,19 +214,14 @@ async function loadServerData(){
   }
 }
 
-// ─── Fetch Binance (client-side) ─────────────────
+// ─── Binance (client) ────────────────────────────
 async function fetchBinance(){
   try{
     const r=await fetch('https://api.binance.com/api/v3/ticker/price');
     if(!r.ok)return false;
     const d=await r.json();
     binancePrices={};
-    d.forEach(t=>{
-      if(t.symbol.endsWith('USDT')){
-        binancePrices[t.symbol.replace('USDT','')]=parseFloat(t.price);
-      }
-    });
-    binanceDone=true;
+    d.forEach(t=>{if(t.symbol.endsWith('USDT'))binancePrices[t.symbol.replace('USDT','')]=parseFloat(t.price);});
     document.getElementById('sBn').textContent='✓ 실시간';
     document.getElementById('sBn').className='ok';
     return true;
@@ -211,74 +232,59 @@ async function fetchBinance(){
   }
 }
 
-// ─── Calculate premiums ──────────────────────────
+// ─── Calculate ───────────────────────────────────
 function calculate(){
   premiums=[];
-
   for(const coin of serverCoins){
     const sym=coin.symbol;
     const bnPrice=binancePrices[sym];
     if(!bnPrice||bnPrice<=0)continue;
 
     const entry={
-      symbol:sym,
-      name:coin.name||sym,
-      image:coin.image||'',
-      rank:coin.market_cap_rank||999,
-      bn_usd:bnPrice,
+      symbol:sym,name:coin.name||sym,image:coin.image||'',
+      rank:coin.market_cap_rank||999,bn_usd:bnPrice,
     };
 
-    // 업비트 프리미엄
     if(coin.upbit_krw&&usdKrw>0){
       entry.up_krw=coin.upbit_krw;
-      const upUsd=coin.upbit_krw/usdKrw;
-      entry.up_prem=((upUsd-bnPrice)/bnPrice)*100;
+      entry.up_prem=((coin.upbit_krw/usdKrw)-bnPrice)/bnPrice*100;
     }
-
-    // 빗썸 프리미엄
     if(coin.bithumb_krw&&usdKrw>0){
       entry.bt_krw=coin.bithumb_krw;
-      const btUsd=coin.bithumb_krw/usdKrw;
-      entry.bt_prem=((btUsd-bnPrice)/bnPrice)*100;
+      entry.bt_prem=((coin.bithumb_krw/usdKrw)-bnPrice)/bnPrice*100;
     }
-
-    // 코인베이스 프리미엄
     if(coin.coinbase_usd){
-      entry.cb_usd=coin.coinbase_usd;
-      entry.cb_prem=((coin.coinbase_usd-bnPrice)/bnPrice)*100;
+      const cbPrem=(coin.coinbase_usd-bnPrice)/bnPrice*100;
+      // ±10% 초과하면 매칭 오류로 판단하여 제외
+      if(Math.abs(cbPrem)<=10){
+        entry.cb_usd=coin.coinbase_usd;
+        entry.cb_prem=cbPrem;
+      }
     }
 
-    // Max/Min
     const vals=[entry.up_prem,entry.bt_prem,entry.cb_prem].filter(v=>v!=null);
     if(vals.length>0){
       entry.max_prem=Math.max(...vals);
       entry.min_prem=Math.min(...vals);
     }
-
     premiums.push(entry);
   }
 
-  // BTC summary
   const btc=premiums.find(p=>p.symbol==='BTC');
   if(btc){
-    const k=document.getElementById('btcKimchi');
-    const c=document.getElementById('btcCB');
-    if(btc.up_prem!=null){k.innerHTML=`<span class="${pCls(btc.up_prem)}">${fmtPct(btc.up_prem)}</span>`;}
-    if(btc.cb_prem!=null){c.innerHTML=`<span class="${pCls(btc.cb_prem)}">${fmtPct(btc.cb_prem)}</span>`;}
+    if(btc.up_prem!=null)document.getElementById('btcKimchi').innerHTML=`<span class="${pCls(btc.up_prem)}">${fmtPct(btc.up_prem)}</span>`;
+    if(btc.cb_prem!=null)document.getElementById('btcCB').innerHTML=`<span class="${pCls(btc.cb_prem)}">${fmtPct(btc.cb_prem)}</span>`;
   }
 }
 
-// ─── Load history ────────────────────────────────
+// ─── History ─────────────────────────────────────
 async function loadHistory(){
   historyData=[];
   const today=new Date();
   for(let i=0;i<30;i++){
     const d=new Date(today);d.setDate(d.getDate()-i);
     const fname=d.toISOString().slice(0,10)+'.json';
-    try{
-      const r=await fetch(`data/history/${fname}`);
-      if(r.ok){const data=await r.json();historyData.push(...data);}
-    }catch(e){}
+    try{const r=await fetch(`data/history/${fname}`);if(r.ok){historyData.push(...await r.json());}}catch(e){}
   }
   historyData.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
 }
@@ -302,7 +308,6 @@ async function init(){
     document.getElementById('countdown').textContent=refreshTimer+'s';
     if(refreshTimer<=0)refresh();
   },1000);
-  // Reload server data every 5 min
   setInterval(loadServerData,300000);
 }
 
@@ -313,22 +318,25 @@ function renderBanner(){
     document.getElementById('sigBanner').innerHTML='<div class="loading"><div class="spinner"></div>데이터 로딩 중...</div>';
     return;
   }
-  const sorted=[...withPrem].sort((a,b)=>b.max_prem-a.max_prem);
-  const top5=sorted.slice(0,5);
+
+  const top5=[...withPrem].sort((a,b)=>b.max_prem-a.max_prem).slice(0,5);
   const bot5=[...withPrem].sort((a,b)=>a.min_prem-b.min_prem).slice(0,5);
 
   document.getElementById('sigBanner').innerHTML=`
-    <div class="sig-box prem"><h3>🔺 프리미엄 TOP 5</h3>${top5.map(c=>sigItem(c,'prem')).join('')}</div>
-    <div class="sig-box disc"><h3>🔻 디스카운트 TOP 5</h3>${bot5.map(c=>sigItem(c,'disc')).join('')}</div>`;
+    <div class="sig-box prem"><h3>🔺 프리미엄 TOP 5</h3>${top5.map(c=>sigItem(c)).join('')}</div>
+    <div class="sig-box disc"><h3>🔻 디스카운트 TOP 5</h3>${bot5.map(c=>sigItem(c)).join('')}</div>`;
 }
 
-function sigItem(c,type){
+function sigItem(c){
   return`<div class="sig-item" onclick="selectCoin('${c.symbol}')">
-    <div class="ci"><img src="${c.image}" onerror="this.style.display='none'"><span class="cs">${c.symbol}</span></div>
-    <div class="vals">
-      ${c.up_prem!=null?`<span class="v-up">업${fmtPct(c.up_prem)}</span>`:''}
-      ${c.bt_prem!=null?`<span class="v-bt">빗${fmtPct(c.bt_prem)}</span>`:''}
-      ${c.cb_prem!=null?`<span class="v-cb">CB${fmtPct(c.cb_prem)}</span>`:''}
+    <div class="sig-row1">
+      <img src="${c.image}" onerror="this.style.display='none'">
+      <span class="sym">${c.symbol}</span>
+    </div>
+    <div class="sig-row2">
+      ${c.up_prem!=null?`<span><span class="ex">업비트</span> <span class="val ${pCls(c.up_prem)}">${fmtPct(c.up_prem)}</span></span>`:''}
+      ${c.bt_prem!=null?`<span><span class="ex">빗썸</span> <span class="val ${pCls(c.bt_prem)}">${fmtPct(c.bt_prem)}</span></span>`:''}
+      ${c.cb_prem!=null?`<span><span class="ex">코인베이스</span> <span class="val ${pCls(c.cb_prem)}">${fmtPct(c.cb_prem)}</span></span>`:''}
     </div>
   </div>`;
 }
@@ -342,13 +350,10 @@ function renderTable(){
   let h=`<table class="ctable"><thead><tr>
     <th onclick="doSort('rank')" class="${sc('rank')}">#${si('rank')}</th>
     <th onclick="doSort('symbol')" class="${sc('symbol')}">코인${si('symbol')}</th>
-    <th onclick="doSort('bn_usd')" class="${sc('bn_usd')}">Binance$${si('bn_usd')}</th>
-    <th onclick="doSort('up_krw')" class="${sc('up_krw')}">업비트₩${si('up_krw')}</th>
-    <th onclick="doSort('up_prem')" class="${sc('up_prem')}">업비트%${si('up_prem')}</th>
-    <th onclick="doSort('bt_krw')" class="${sc('bt_krw')}">빗썸₩${si('bt_krw')}</th>
-    <th onclick="doSort('bt_prem')" class="${sc('bt_prem')}">빗썸%${si('bt_prem')}</th>
-    <th onclick="doSort('cb_usd')" class="${sc('cb_usd')}">Coinbase$${si('cb_usd')}</th>
-    <th onclick="doSort('cb_prem')" class="${sc('cb_prem')}">CB%${si('cb_prem')}</th>
+    <th onclick="doSort('bn_usd')" class="${sc('bn_usd')}">가격${si('bn_usd')}</th>
+    <th onclick="doSort('up_prem')" class="${sc('up_prem')}">업비트${si('up_prem')}</th>
+    <th onclick="doSort('bt_prem')" class="${sc('bt_prem')}">빗썸${si('bt_prem')}</th>
+    <th onclick="doSort('cb_prem')" class="${sc('cb_prem')}">코인베이스${si('cb_prem')}</th>
   </tr></thead><tbody>`;
 
   data.forEach(c=>{
@@ -357,12 +362,9 @@ function renderTable(){
       <td><div class="cc"><img src="${c.image}" onerror="this.style.display='none'">
         <span class="sym">${c.symbol}</span><span class="nm">${c.name}</span></div></td>
       <td>${fmtUSD(c.bn_usd)}</td>
-      <td>${c.up_krw?fmtKRW(c.up_krw):'<span class="lc">—</span>'}</td>
-      <td class="${c.up_prem!=null?pCls(c.up_prem):''}">${c.up_prem!=null?fmtPct(c.up_prem):'<span class="lc">—</span>'}</td>
-      <td>${c.bt_krw?fmtKRW(c.bt_krw):'<span class="lc">—</span>'}</td>
-      <td class="${c.bt_prem!=null?pCls(c.bt_prem):''}">${c.bt_prem!=null?fmtPct(c.bt_prem):'<span class="lc">—</span>'}</td>
-      <td>${c.cb_usd?fmtUSD(c.cb_usd):'<span class="lc">—</span>'}</td>
-      <td class="${c.cb_prem!=null?pCls(c.cb_prem):''}">${c.cb_prem!=null?fmtPct(c.cb_prem):'<span class="lc">—</span>'}</td>
+      <td class="prem-cell ${c.up_prem!=null?pCls(c.up_prem):''}">${c.up_prem!=null?fmtPct(c.up_prem):'<span class="lc">—</span>'}</td>
+      <td class="prem-cell ${c.bt_prem!=null?pCls(c.bt_prem):''}">${c.bt_prem!=null?fmtPct(c.bt_prem):'<span class="lc">—</span>'}</td>
+      <td class="prem-cell ${c.cb_prem!=null?pCls(c.cb_prem):''}">${c.cb_prem!=null?fmtPct(c.cb_prem):'<span class="lc">—</span>'}</td>
     </tr>`;
   });
 
@@ -377,13 +379,9 @@ function sortData(arr,col,dir){
       case 'rank':va=a.rank||999;vb=b.rank||999;break;
       case 'symbol':return dir==='asc'?a.symbol.localeCompare(b.symbol):b.symbol.localeCompare(a.symbol);
       case 'bn_usd':va=a.bn_usd||0;vb=b.bn_usd||0;break;
-      case 'up_krw':va=a.up_krw||0;vb=b.up_krw||0;break;
       case 'up_prem':va=a.up_prem??-999;vb=b.up_prem??-999;break;
-      case 'bt_krw':va=a.bt_krw||0;vb=b.bt_krw||0;break;
       case 'bt_prem':va=a.bt_prem??-999;vb=b.bt_prem??-999;break;
-      case 'cb_usd':va=a.cb_usd||0;vb=b.cb_usd||0;break;
       case 'cb_prem':va=a.cb_prem??-999;vb=b.cb_prem??-999;break;
-      case 'max_prem':va=a.max_prem??-999;vb=b.max_prem??-999;break;
       default:va=0;vb=0;
     }
     return dir==='asc'?va-vb:vb-va;
@@ -408,18 +406,15 @@ function renderChart(symbol){
   document.getElementById('chartHeader').innerHTML=`
     <div class="dc"><img src="${c.image}" onerror="this.style.display='none'">${symbol} 프리미엄 추이</div>
     <div class="ds">
-      <div class="st"><span class="sl">업비트</span><span class="sv v-up">${c.up_prem!=null?fmtPct(c.up_prem):'—'}</span></div>
-      <div class="st"><span class="sl">빗썸</span><span class="sv v-bt">${c.bt_prem!=null?fmtPct(c.bt_prem):'—'}</span></div>
-      <div class="st"><span class="sl">Coinbase</span><span class="sv v-cb">${c.cb_prem!=null?fmtPct(c.cb_prem):'—'}</span></div>
+      <div class="st"><span class="sl">업비트</span><span class="sv ${c.up_prem!=null?pCls(c.up_prem):''}">${c.up_prem!=null?fmtPct(c.up_prem):'—'}</span></div>
+      <div class="st"><span class="sl">빗썸</span><span class="sv ${c.bt_prem!=null?pCls(c.bt_prem):''}">${c.bt_prem!=null?fmtPct(c.bt_prem):'—'}</span></div>
+      <div class="st"><span class="sl">코인베이스</span><span class="sv ${c.cb_prem!=null?pCls(c.cb_prem):''}">${c.cb_prem!=null?fmtPct(c.cb_prem):'—'}</span></div>
     </div>`;
 
   const periodDays=parseInt(document.querySelector('.pbtn.active').dataset.period);
   const cutoff=new Date();cutoff.setDate(cutoff.getDate()-periodDays);
 
-  // History: calculate premium from stored KRW prices + stored exchange rate
-  const filtered=historyData.filter(h=>{
-    return new Date(h.timestamp)>=cutoff&&h.coins&&h.coins[symbol];
-  });
+  const filtered=historyData.filter(h=>new Date(h.timestamp)>=cutoff&&h.coins&&h.coins[symbol]);
 
   if(!filtered.length){
     document.getElementById('chartBox').innerHTML='<div class="loading">히스토리 데이터가 아직 없습니다 (서버 수집 후 표시)</div>';
@@ -434,22 +429,16 @@ function renderChart(symbol){
     return`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
   });
 
-  // For history chart, we need to calculate premium from stored prices
-  // History stores: up_krw, bt_krw, cb_usd and the usd_krw at that time
-  // But we don't have Binance in history (server can't access it)
-  // So we use cb_usd as reference for history chart
   const upData=filtered.map(h=>{
     const coin=h.coins[symbol];
     if(!coin||!coin.up_krw||!coin.cb_usd||!h.usd_krw)return null;
-    const upUsd=coin.up_krw/h.usd_krw;
-    return ((upUsd-coin.cb_usd)/coin.cb_usd*100);
+    return((coin.up_krw/h.usd_krw-coin.cb_usd)/coin.cb_usd*100);
   });
 
   const btData=filtered.map(h=>{
     const coin=h.coins[symbol];
     if(!coin||!coin.bt_krw||!coin.cb_usd||!h.usd_krw)return null;
-    const btUsd=coin.bt_krw/h.usd_krw;
-    return ((btUsd-coin.cb_usd)/coin.cb_usd*100);
+    return((coin.bt_krw/h.usd_krw-coin.cb_usd)/coin.cb_usd*100);
   });
 
   const datasets=[

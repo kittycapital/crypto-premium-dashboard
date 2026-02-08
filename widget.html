@@ -16,7 +16,7 @@ a{text-decoration:none;color:inherit}
 .btc-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .btc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;cursor:pointer;transition:border-color .2s}
 .btc-card:hover{border-color:#2a2a45}
-.btc-card .label{font-size:10px;color:var(--t3);text-transform:uppercase;margin-bottom:2px}
+.btc-card .label{font-size:10px;color:var(--t3);margin-bottom:2px}
 .btc-card .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px}
 .btc-card .sub{font-size:9px;color:var(--t3);margin-top:2px}
 .pos{color:var(--green)}.neg{color:var(--red)}
@@ -24,18 +24,21 @@ a{text-decoration:none;color:inherit}
 .boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:border-color .2s}
 .box:hover{border-color:#2a2a45}
-.box h3{font-size:11px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.box h3{font-size:12px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:5px}
 .box.prem h3{color:var(--green)}
 .box.disc h3{color:var(--red)}
-.item{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1c1c2e60;font-size:12px}
+
+.item{padding:6px 0;border-bottom:1px solid #1c1c2e60}
 .item:last-child{border-bottom:none}
-.item .left{display:flex;align-items:center;gap:6px}
-.item img{width:16px;height:16px;border-radius:50%}
-.item .sym{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px}
-.item .pct{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px}
-.item .src{font-size:9px;color:var(--t3);margin-left:2px}
-.prem .pct{color:var(--green)}
-.disc .pct{color:var(--red)}
+.item-row1{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.item-row1 .left{display:flex;align-items:center;gap:6px}
+.item-row1 img{width:16px;height:16px;border-radius:50%}
+.item-row1 .sym{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px}
+.item-row1 .best{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+.item-row2{display:flex;gap:10px;padding-left:22px;font-size:10px}
+.item-row2 .ex{color:var(--t3)}
+.item-row2 .val{font-family:'JetBrains Mono',monospace;font-weight:500}
+
 .more{text-align:center;font-size:10px;color:var(--t3);padding:4px 0}
 .more span{color:var(--cyan);font-weight:500}
 
@@ -48,7 +51,7 @@ a{text-decoration:none;color:inherit}
   <div class="btc-bar">
     <div class="btc-card"><div class="label">USD/KRW</div><div class="val" id="wRate">···</div><div class="sub">실시간 역산</div></div>
     <div class="btc-card"><div class="label">BTC 김치프리미엄</div><div class="val" id="wKimchi">···</div><div class="sub">업비트 vs Binance</div></div>
-    <div class="btc-card"><div class="label">BTC 코베프리미엄</div><div class="val" id="wCB">···</div><div class="sub">Coinbase vs Binance</div></div>
+    <div class="btc-card"><div class="label">BTC 코인베이스</div><div class="val" id="wCB">···</div><div class="sub">코인베이스 vs Binance</div></div>
   </div>
   <div class="boxes">
     <div class="box prem"><h3>🔺 프리미엄 TOP 5</h3><div id="topList">로딩 중...</div></div>
@@ -64,19 +67,16 @@ const pCls=v=>v>0?'pos':'neg';
 
 async function load(){
   try{
-    // 1. Server data (Upbit, Bithumb, Coinbase prices)
     const sr=await fetch('data/coins.json?t='+Date.now());
     const serverData=await sr.json();
     const coins=serverData.coins||[];
     const usdKrw=serverData.usd_krw||1450;
 
-    // 2. Binance (client-side)
     const bnR=await fetch('https://api.binance.com/api/v3/ticker/price');
     const bnData=await bnR.json();
     const bn={};
     bnData.forEach(t=>{if(t.symbol.endsWith('USDT'))bn[t.symbol.replace('USDT','')]=+t.price;});
 
-    // 3. Calculate premiums
     document.getElementById('wRate').textContent=usdKrw.toFixed(0)+'원';
 
     const results=[];
@@ -89,50 +89,51 @@ async function load(){
       const vals=[];
 
       if(coin.upbit_krw&&usdKrw){
-        const upP=((coin.upbit_krw/usdKrw)-bnP)/bnP*100;
-        entry.up=upP;vals.push({v:upP,src:'업'});
+        const p=((coin.upbit_krw/usdKrw)-bnP)/bnP*100;
+        entry.up=p;vals.push({v:p,src:'업비트'});
       }
       if(coin.bithumb_krw&&usdKrw){
-        const btP=((coin.bithumb_krw/usdKrw)-bnP)/bnP*100;
-        entry.bt=btP;vals.push({v:btP,src:'빗'});
+        const p=((coin.bithumb_krw/usdKrw)-bnP)/bnP*100;
+        entry.bt=p;vals.push({v:p,src:'빗썸'});
       }
       if(coin.coinbase_usd){
-        const cbP=(coin.coinbase_usd-bnP)/bnP*100;
-        entry.cb=cbP;vals.push({v:cbP,src:'CB'});
+        const p=(coin.coinbase_usd-bnP)/bnP*100;
+        if(Math.abs(p)<=10){entry.cb=p;vals.push({v:p,src:'코인베이스'});}
       }
 
       if(vals.length){
         vals.sort((a,b)=>b.v-a.v);
         entry.maxV=vals[0].v;entry.maxSrc=vals[0].src;
         entry.minV=vals[vals.length-1].v;entry.minSrc=vals[vals.length-1].src;
+        entry.allVals=vals;
         results.push(entry);
 
-        // BTC summary
         if(sym==='BTC'){
-          if(entry.up!=null){
-            const el=document.getElementById('wKimchi');
-            el.textContent=fmtPct(entry.up);el.className='val '+pCls(entry.up);
-          }
-          if(entry.cb!=null){
-            const el=document.getElementById('wCB');
-            el.textContent=fmtPct(entry.cb);el.className='val '+pCls(entry.cb);
-          }
+          if(entry.up!=null){const el=document.getElementById('wKimchi');el.textContent=fmtPct(entry.up);el.className='val '+pCls(entry.up);}
+          if(entry.cb!=null){const el=document.getElementById('wCB');el.textContent=fmtPct(entry.cb);el.className='val '+pCls(entry.cb);}
         }
       }
     }
 
-    // Top 5 / Bottom 5
     results.sort((a,b)=>b.maxV-a.maxV);
     const top5=results.slice(0,5);
     const bot5=[...results].sort((a,b)=>a.minV-b.minV).slice(0,5);
 
-    document.getElementById('topList').innerHTML=top5.map(c=>
-      `<div class="item"><div class="left"><img src="${c.image}" onerror="this.style.display='none'"><span class="sym">${c.symbol}</span></div><span class="pct">${fmtPct(c.maxV)}<span class="src">${c.maxSrc}</span></span></div>`
-    ).join('');
+    const renderItem=(c,type)=>{
+      const bestVal=type==='prem'?c.maxV:c.minV;
+      const cls=pCls(bestVal);
+      const details=c.allVals.map(v=>`<span><span class="ex">${v.src}</span> <span class="val ${pCls(v.v)}">${fmtPct(v.v)}</span></span>`).join(' ');
+      return`<div class="item">
+        <div class="item-row1">
+          <div class="left"><img src="${c.image}" onerror="this.style.display='none'"><span class="sym">${c.symbol}</span></div>
+          <span class="best ${cls}">${fmtPct(bestVal)}</span>
+        </div>
+        <div class="item-row2">${details}</div>
+      </div>`;
+    };
 
-    document.getElementById('botList').innerHTML=bot5.map(c=>
-      `<div class="item"><div class="left"><img src="${c.image}" onerror="this.style.display='none'"><span class="sym">${c.symbol}</span></div><span class="pct">${fmtPct(c.minV)}<span class="src">${c.minSrc}</span></span></div>`
-    ).join('');
+    document.getElementById('topList').innerHTML=top5.map(c=>renderItem(c,'prem')).join('');
+    document.getElementById('botList').innerHTML=bot5.map(c=>renderItem(c,'disc')).join('');
 
   }catch(e){
     console.error(e);
