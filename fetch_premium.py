@@ -1,6 +1,6 @@
 """
 프리미엄 대시보드 - 서버 사이드 데이터 수집 (30분 간격)
-- CoinGecko: TOP 100 코인 메타데이터 (이름, 이미지, 랭크)
+- CoinGecko: TOP 200 코인 메타데이터 (이름, 이미지, 랭크)
 - 업비트: KRW 전체 시세
 - 빗썸: KRW 전체 시세
 - Coinbase: USD 시세
@@ -38,9 +38,9 @@ def api_get(url, retries=3, delay=2):
 
 
 def get_coingecko_top():
-    """CoinGecko 마켓캡 TOP 100"""
-    print("[1/4] CoinGecko TOP 100 메타데이터...")
-    data = api_get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+    """CoinGecko 마켓캡 TOP 200"""
+    print("[1/4] CoinGecko TOP 200 메타데이터...")
+    data = api_get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false")
     if not data:
         return {}
     coins = {}
@@ -124,7 +124,7 @@ def get_coinbase_prices():
 
 
 def build_coins_json(cg_meta, upbit, bithumb, coinbase):
-    """coins.json 빌드 - CoinGecko TOP 100 기준 필터링"""
+    """coins.json 빌드 - CoinGecko TOP 200 기준 필터링"""
 
     # 환율 역산: 업비트 BTC / Coinbase BTC
     up_btc = upbit.get("BTC", 0)
