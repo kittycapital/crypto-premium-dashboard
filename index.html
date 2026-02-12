@@ -81,7 +81,10 @@ body::-webkit-scrollbar{display:none}
 }
 .ctable th:first-child{text-align:center;width:40px}
 .ctable th:nth-child(2){text-align:left}
-.ctable th:hover{color:var(--t1)}.ctable th.sorted{color:var(--blue)}
+.ctable th:hover{color:var(--t1);background:var(--elev);border-radius:4px}
+.ctable th.sorted{color:var(--blue)}
+.sort-icon{font-size:10px;margin-left:2px;opacity:0.3}
+.ctable th.sorted .sort-icon{opacity:1;color:var(--blue)}
 
 .ctable td{
   padding:12px;border-bottom:1px solid var(--border);
@@ -378,7 +381,7 @@ function renderTable(){
     countEl.textContent='';
   }
 
-  const si=c=>sortState.col===c?(sortState.dir==='asc'?' ↑':' ↓'):'';
+  const si=c=>sortState.col===c?`<span class="sort-icon">${sortState.dir==='asc'?' ↑':' ↓'}</span>`:'<span class="sort-icon"> ↕</span>';
   const sc=c=>sortState.col===c?'sorted':'';
 
   let h=`<table class="ctable"><thead><tr>
