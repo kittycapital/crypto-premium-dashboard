@@ -57,6 +57,14 @@ body::-webkit-scrollbar{display:none}
 .sig-row2 .val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px}
 .pos{color:var(--green)}.neg{color:var(--red)}.neu{color:var(--t3)}
 
+.search-wrap{margin-bottom:14px}
+.search-input{width:100%;padding:10px 14px 10px 38px;background:var(--elev);border:1px solid var(--border);border-radius:8px;color:var(--t1);font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--blue)}
+.search-input::placeholder{color:var(--t3)}
+.search-wrap{position:relative}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px;pointer-events:none}
+.search-count{font-size:11px;color:var(--t3);margin-top:6px}
+
 /* ─── Table ─── */
 .section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px}
 .stitle{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
@@ -161,6 +169,11 @@ body::-webkit-scrollbar{display:none}
   <div class="section">
     <div class="stitle">📋 전체 코인 프리미엄</div>
     <div class="ssub">기준: Binance USDT (실시간) · 프리미엄 = (거래소 가격 − Binance) / Binance × 100</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="coinSearch" placeholder="코인 검색 (이름 또는 심볼)" autocomplete="off">
+      <div class="search-count" id="searchCount"></div>
+    </div>
     <div class="twrap" id="tableWrap">
       <div class="loading"><div class="spinner"></div>데이터 로딩 중...</div>
     </div>
@@ -344,8 +357,27 @@ function sigItem(c){
 }
 
 // ─── Table ───────────────────────────────────────
+let searchQuery='';
+
 function renderTable(){
-  const data=sortData([...premiums],sortState.col,sortState.dir);
+  let data=[...premiums];
+
+  // 검색 필터
+  if(searchQuery){
+    const q=searchQuery.toLowerCase();
+    data=data.filter(c=>c.symbol.toLowerCase().includes(q)||c.name.toLowerCase().includes(q));
+  }
+
+  data=sortData(data,sortState.col,sortState.dir);
+
+  // 검색 카운트 표시
+  const countEl=document.getElementById('searchCount');
+  if(searchQuery){
+    countEl.textContent=`${data.length}개 코인 검색됨`;
+  }else{
+    countEl.textContent='';
+  }
+
   const si=c=>sortState.col===c?(sortState.dir==='asc'?' ↑':' ↓'):'';
   const sc=c=>sortState.col===c?'sorted':'';
 
@@ -370,9 +402,18 @@ function renderTable(){
     </tr>`;
   });
 
+  if(!data.length){
+    h+='<tr><td colspan="6" style="text-align:center;color:var(--t3);padding:24px;font-family:Noto Sans KR,sans-serif">검색 결과가 없습니다</td></tr>';
+  }
+
   h+='</tbody></table>';
   document.getElementById('tableWrap').innerHTML=h;
 }
+
+document.getElementById('coinSearch').addEventListener('input',function(){
+  searchQuery=this.value.trim();
+  renderTable();
+});
 
 function sortData(arr,col,dir){
   return arr.sort((a,b)=>{
