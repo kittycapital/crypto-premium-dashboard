@@ -208,14 +208,6 @@ body::-webkit-scrollbar{display:none}
       </div>
     </div>
 
-    <!-- MAJOR 5 -->
-    <div class="card s12">
-      <div class="card-label">MAJOR COINS</div>
-      <div class="card-title">🏆 메이저 코인 프리미엄</div>
-      <div class="card-desc">BTC, ETH, XRP, BNB, SOL — 클릭하면 차트 전환</div>
-      <div class="major-grid" id="majorGrid"></div>
-    </div>
-
     <!-- TOP 50 AVG -->
     <div class="card s12">
       <div class="card-label">TOP 50 AVERAGE</div>
@@ -225,6 +217,14 @@ body::-webkit-scrollbar{display:none}
         <div class="avg-stat"><div class="avg-label">빗썸 평균</div><div class="avg-val" id="avgBithumb">—</div><div class="avg-sub">김치 프리미엄</div></div>
         <div class="avg-stat"><div class="avg-label">코인베이스 평균</div><div class="avg-val" id="avgCoinbase">—</div><div class="avg-sub">코인베이스 프리미엄</div></div>
       </div>
+    </div>
+
+    <!-- MAJOR 5 -->
+    <div class="card s12">
+      <div class="card-label">MAJOR COINS</div>
+      <div class="card-title">🏆 메이저 코인 프리미엄</div>
+      <div class="card-desc">BTC, ETH, XRP, BNB, SOL — 클릭하면 차트 전환</div>
+      <div class="major-grid" id="majorGrid"></div>
     </div>
 
     <!-- CHART -->
@@ -472,12 +472,11 @@ async function refresh(){await fetchBinance();calculate();renderMajors();renderA
 async function init(){await loadServerData();loadHistory();await refresh();setInterval(function(){refreshTimer--;document.getElementById('countdown').textContent=refreshTimer+'s';if(refreshTimer<=0)refresh();},1000);setInterval(loadServerData,300000);}
 
 /* IFRAME RESIZE */
-var _lastH=0,_ht;
-function sendHeight(){clearTimeout(_ht);_ht=setTimeout(function(){var el=document.querySelector('.hv-page');var h=(el?el.offsetTop+el.offsetHeight:document.body.scrollHeight);if(Math.abs(h-_lastH)>5){_lastH=h;window.parent.postMessage({type:'resize',height:h},'*');window.parent.postMessage({height:h},'*');window.parent.postMessage(JSON.stringify({event:'setHeight',height:h}),'*');}},150);}
+var _lastH=0,_ht,_frameId='hvPremiumAll';
+function sendHeight(){clearTimeout(_ht);_ht=setTimeout(function(){var el=document.querySelector('.hv-page');var h=(el?el.offsetTop+el.offsetHeight+20:document.body.scrollHeight);if(Math.abs(h-_lastH)>5){_lastH=h;window.parent.postMessage({type:'resize',height:h,id:_frameId},'*');window.parent.postMessage({height:h,id:_frameId},'*');}},150);}
 window.addEventListener('resize',sendHeight);
 window.addEventListener('load',function(){sendHeight();setTimeout(sendHeight,500);setTimeout(sendHeight,1500);setTimeout(sendHeight,3000);});
 new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true});
-window.addEventListener('message',function(e){if(e.data&&e.data.type==='requestResize'){_lastH=0;sendHeight();}});
 setInterval(sendHeight,2000);
 
 init();
