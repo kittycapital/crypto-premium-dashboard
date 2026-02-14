@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>프리미엄 시그널 | Herdvibe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.1/kakao.min.js" crossorigin="anonymous" async></script>
+<style>
+:root {
+  --hv-primary:#3b82f6;--hv-primary-light:#60a5fa;--hv-primary-dark:#2563eb;
+  --hv-primary-glow:rgba(59,130,246,0.12);
+  --hv-up:#22c55e;--hv-up-bg:rgba(34,197,94,0.1);
+  --hv-down:#ef4444;--hv-down-bg:rgba(239,68,68,0.1);
+  --hv-warning:#f59e0b;--hv-warning-bg:rgba(245,158,11,0.1);
+  --hv-neutral:#6b7280;
+  --hv-bg-base:#000;--hv-bg-surface:#0a0a0a;--hv-bg-card:#111;
+  --hv-bg-card-hover:#181818;--hv-bg-elevated:#1a1a1a;
+  --hv-text-primary:#e5e5e5;--hv-text-secondary:#8a8a8a;
+  --hv-text-tertiary:#555;--hv-text-muted:#3a3a3a;
+  --hv-border:rgba(255,255,255,0.06);--hv-border-strong:rgba(255,255,255,0.12);
+  --hv-font-display:'Plus Jakarta Sans',sans-serif;
+  --hv-font-body:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  --hv-font-mono:'JetBrains Mono','SF Mono',monospace;
+  --hv-space-xs:8px;--hv-space-sm:12px;--hv-space-md:16px;
+  --hv-space-lg:24px;--hv-space-xl:32px;
+  --hv-radius-sm:6px;--hv-radius-md:10px;--hv-radius-lg:14px;
+  --hv-shadow-sm:0 1px 3px rgba(0,0,0,.5);--hv-shadow-lg:0 8px 32px rgba(0,0,0,.7);
+  --hv-transition-fast:150ms ease;--hv-transition:250ms ease;
+  --hv-max-width:1280px;--hv-header-height:60px;
+  --blue:#4a9eff;--cyan:#00e5cc;--red:#ff4a6a;--orange:#ff8c42;
+  --yellow:#ffd642;--green:#42ff8c;--purple:#a855f7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--hv-font-body);background:var(--hv-bg-base);color:var(--hv-text-primary);line-height:1.6;min-height:100vh;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}
+body::-webkit-scrollbar{display:none}
+a{color:var(--hv-primary-light);text-decoration:none}
+::selection{background:var(--hv-primary);color:#fff}
+
+/* HEADER */
+.hv-header{position:sticky;top:0;z-index:100;height:var(--hv-header-height);background:rgba(0,0,0,.9);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--hv-border);display:flex;align-items:center;padding:0 var(--hv-space-lg)}
+.hv-header-inner{width:100%;max-width:var(--hv-max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--hv-space-md)}
+.hv-header-center{display:flex;flex-direction:column;min-width:0}
+.hv-header-center h1{font-family:var(--hv-font-display);font-size:.938rem;font-weight:600;color:var(--hv-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hv-header-category{font-size:.7rem;color:var(--hv-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.hv-header-right{display:flex;align-items:center;gap:var(--hv-space-xs);flex-shrink:0}
+.hv-update-badge{font-family:var(--hv-font-mono);font-size:.688rem;color:var(--hv-text-tertiary);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.hv-live-dot{width:5px;height:5px;background:var(--hv-up);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* PAGE */
+.hv-page{max-width:var(--hv-max-width);margin:0 auto;padding:var(--hv-space-lg)}
+.dash-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:var(--hv-bg-card);border:1px solid var(--hv-border);border-radius:var(--hv-radius-lg);padding:18px 20px 16px;position:relative;overflow:visible;animation:fadeUp .5s ease both}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.08s}
+.card:nth-child(3){animation-delay:.11s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card-label{font-family:var(--hv-font-mono);font-size:10px;font-weight:500;color:var(--hv-text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.card-title{font-size:15px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:7px}
+.card-desc{font-size:11.5px;color:var(--hv-text-secondary);margin-bottom:14px;line-height:1.5}
+.s12{grid-column:span 12}.s6{grid-column:span 6}
+
+/* RATE BAR */
+.rate-bar{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.rate-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--hv-text-secondary)}
+.rate-val{font-family:var(--hv-font-mono);font-weight:600;color:var(--hv-text-primary);font-size:13px}
+.status-bar{display:flex;gap:14px;font-size:10px;color:var(--hv-text-tertiary);flex-wrap:wrap}
+.ok{color:var(--green)}.ld{color:var(--orange)}.fl{color:var(--red)}
+.up{color:var(--green)}.dn{color:var(--red)}.neu{color:var(--hv-text-muted)}
+
+/* SIGNAL ITEMS */
+.sig-item{padding:12px 0;border-bottom:1px solid var(--hv-border);transition:background .15s}
+.sig-item:last-child{border-bottom:none}
+.sig-item:hover{background:var(--hv-bg-card-hover);margin:0 -20px;padding:12px 20px;border-radius:6px}
+.sig-row1{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.sig-row1 img{width:22px;height:22px;border-radius:50%}
+.sig-row1 .sym{font-family:var(--hv-font-mono);font-weight:700;font-size:14px;color:var(--hv-text-primary)}
+.sig-row2{display:flex;gap:16px;padding-left:30px;font-size:13px}
+.sig-row2 .ex{color:var(--hv-text-secondary);font-size:12px;margin-right:3px;font-weight:500}
+.sig-row2 .val{font-family:var(--hv-font-mono);font-weight:600;font-size:13px}
+.pos{color:var(--green)}.neg{color:var(--red)}
+
+.loading{display:flex;align-items:center;justify-content:center;height:120px;color:var(--hv-text-tertiary);font-size:13px}
+.spinner{width:16px;height:16px;border:2px solid var(--hv-border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-right:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SHARE BAR */
+.share-bar{display:flex;align-items:center;justify-content:space-between;padding:12px var(--hv-space-lg);border-top:1px solid var(--hv-border);background:var(--hv-bg-surface);border-radius:0 0 var(--hv-radius-lg) var(--hv-radius-lg)}
+.share-bar-preview{font-size:.75rem;color:var(--hv-text-tertiary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:50%;line-height:1.4;font-family:var(--hv-font-mono)}
+.share-bar-preview span{color:var(--hv-text-secondary);font-weight:500}
+.share-bar-buttons{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.share-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;font-size:.75rem;font-weight:600;font-family:var(--hv-font-body);cursor:pointer;transition:all var(--hv-transition-fast);border:1px solid var(--hv-border-strong);background:var(--hv-bg-card);color:#999;white-space:nowrap}
+.share-btn:hover{transform:translateY(-1px);box-shadow:var(--hv-shadow-sm);color:var(--hv-text-primary)}
+.share-btn svg{flex-shrink:0}
+.share-btn--x:hover{border-color:#fff;color:#fff;background:#111}
+.share-btn--kakao:hover{border-color:#FEE500;color:#191919;background:#FEE500}
+.share-btn--tg:hover{border-color:#26A5E4;color:#fff;background:rgba(38,165,228,.15)}
+.share-btn--ig:hover{border-color:#E4405F;color:#fff;background:rgba(228,64,95,.15)}
+.share-btn--copy:hover{border-color:var(--hv-primary);color:var(--hv-primary-light);background:var(--hv-primary-glow)}
+
+.toast-wrap{position:fixed;bottom:20px;right:20px;z-index:200;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--hv-bg-elevated);border:1px solid var(--hv-border-strong);border-radius:var(--hv-radius-md);padding:10px 18px;font-size:.788rem;color:var(--hv-text-primary);box-shadow:var(--hv-shadow-lg);animation:toastIn .3s ease;border-left:3px solid var(--hv-up)}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1024px){.s6{grid-column:span 12}}
+@media(max-width:768px){
+  :root{--hv-header-height:52px}
+  .hv-page{padding:var(--hv-space-md)}.hv-header{padding:0 var(--hv-space-md)}
+  .hv-update-badge{display:none}.dash-grid{gap:10px}
+  .card{padding:14px 14px 12px}.card-title{font-size:14px}
+  .sig-row2{gap:10px;font-size:12px}
+  .share-bar{flex-direction:column;gap:10px;align-items:stretch}
+  .share-bar-preview{max-width:100%}
+  .share-bar-buttons{justify-content:center;flex-wrap:wrap}
+  .share-btn span.label-text{display:none}
+  .share-btn{padding:8px 10px}
+}
+@media(max-width:520px){.hv-page{padding:12px 10px 24px}}
+</style>
+</head>
+<body>
+
+<header class="hv-header">
+  <div class="hv-header-inner">
+    <div class="hv-header-center">
+      <h1>🇰🇷 프리미엄 시그널</h1>
+      <span class="hv-header-category">Premium · Signal</span>
+    </div>
+    <div class="hv-header-right">
+      <div class="hv-update-badge"><span class="hv-live-dot"></span><span id="countdown">30s</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="hv-page">
+  <div class="dash-grid">
+
+    <!-- RATE OVERVIEW -->
+    <div class="card s12" id="rateCard">
+      <div class="card-label">MARKET RATES</div>
+      <div class="card-title">💱 환율 & 기준 프리미엄</div>
+      <div class="rate-bar">
+        <div class="rate-item">USD/KRW: <span class="rate-val" id="rateDisplay">—</span></div>
+        <div class="rate-item">BTC 김치: <span class="rate-val" id="btcKimchi">—</span></div>
+        <div class="rate-item">BTC 코인베이스: <span class="rate-val" id="btcCB">—</span></div>
+      </div>
+      <div class="status-bar">
+        <span>서버: <span id="sServer" class="ld">···</span></span>
+        <span>Binance: <span id="sBn" class="ld">···</span></span>
+      </div>
+    </div>
+
+    <!-- TOP 5 PREMIUM -->
+    <div class="card s6" id="topCard">
+      <div class="card-label">PREMIUM TOP 5</div>
+      <div class="card-title" style="color:var(--green)">🔺 프리미엄 TOP 5</div>
+      <div class="card-desc">가장 높은 프리미엄이 붙은 코인</div>
+      <div id="topList"><div class="loading"><div class="spinner"></div>데이터 로딩 중...</div></div>
+    </div>
+
+    <!-- TOP 5 DISCOUNT -->
+    <div class="card s6" id="botCard">
+      <div class="card-label">DISCOUNT TOP 5</div>
+      <div class="card-title" style="color:var(--red)">🔻 디스카운트 TOP 5</div>
+      <div class="card-desc">가장 큰 할인이 적용된 코인</div>
+      <div id="botList"><div class="loading"><div class="spinner"></div>데이터 로딩 중...</div></div>
+    </div>
+
+  </div>
+
+  <!-- SHARE BAR -->
+  <div style="background:var(--hv-bg-card);border:1px solid var(--hv-border);border-radius:var(--hv-radius-lg);margin-top:var(--hv-space-lg);overflow:hidden">
+    <div class="share-bar" style="border-top:none">
+      <div class="share-bar-preview"><span>프리미엄 시그널</span> — herdvibe.com</div>
+      <div class="share-bar-buttons">
+        <button class="share-btn share-btn--x" onclick="doShare('twitter')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span class="label-text">트위터</span></button>
+        <button class="share-btn share-btn--kakao" onclick="doShare('kakao')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.463 2 10.691c0 2.724 1.8 5.112 4.508 6.458l-1.148 4.265a.5.5 0 0 0 .764.533l4.94-3.26c.304.02.612.03.936.03 5.523 0 10-3.462 10-7.735C22 6.463 17.523 3 12 3z"/></svg><span class="label-text">카카오톡</span></button>
+        <button class="share-btn share-btn--tg" onclick="doShare('telegram')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="label-text">텔레그램</span></button>
+        <button class="share-btn share-btn--ig" onclick="doShare('instagram',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span class="label-text">인스타</span></button>
+        <button class="share-btn share-btn--copy" onclick="doShare('link',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span class="label-text">링크 복사</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== SHARE ===== */
+var SHARE_URL='https://herdvibe.com/44';
+function ensureKakao(){try{if(typeof Kakao!=='undefined'&&!Kakao.isInitialized())Kakao.init('a43ed7b39fac35458f4f9df925a279b5');return typeof Kakao!=='undefined'&&Kakao.isInitialized();}catch(e){return false;}}
+ensureKakao();
+function copyToClipboard(t){try{window.parent.postMessage({type:'clipboard',text:t},'*');}catch(e){}try{navigator.clipboard.writeText(t);}catch(e){}}
+function flashCopied(btn){if(!btn)return;var o=btn.innerHTML;btn.style.background='#22c55e';btn.style.color='#fff';btn.style.borderColor='#22c55e';var hl=btn.querySelector('.label-text');btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>'+(hl?'<span class="label-text" style="color:#fff">복사됨!</span>':'');setTimeout(function(){btn.style.background='';btn.style.color='';btn.style.borderColor='';btn.innerHTML=o;},2000);}
+function doShare(p,btn){var u=SHARE_URL,t=encodeURIComponent('프리미엄 시그널 | herdvibe.com'),eu=encodeURIComponent(u);switch(p){case'twitter':window.open('https://twitter.com/intent/tweet?text='+t+'&url='+eu,'_blank');break;case'telegram':window.open('https://t.me/share/url?url='+eu+'&text='+t,'_blank');break;case'kakao':if(!ensureKakao()){copyToClipboard(u);toast('링크 복사완료!');}else try{Kakao.Share.sendDefault({objectType:'feed',content:{title:'프리미엄 시그널',description:'김치/코인베이스 프리미엄 실시간 시그널',imageUrl:'https://raw.githubusercontent.com/kittycapital/kittycapital.github.io/main/assets/herdvibe-og.png',link:{mobileWebUrl:u,webUrl:u}},buttons:[{title:'대시보드 보기',link:{mobileWebUrl:u,webUrl:u}}]});}catch(e){copyToClipboard(u);toast('링크 복사완료!');}break;case'instagram':copyToClipboard(u);flashCopied(btn);toast('링크 복사완료! 인스타그램에 붙여넣기 하세요');break;case'link':copyToClipboard(u);flashCopied(btn);toast('링크가 복사되었습니다 ✓');break;}}
+function toast(m){var c=document.querySelector('.toast-wrap');if(!c){c=document.createElement('div');c.className='toast-wrap';document.body.appendChild(c);}var t=document.createElement('div');t.className='toast';t.textContent=m;c.appendChild(t);setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';t.style.transition='.3s';setTimeout(function(){t.remove();},300);},3000);}
+
+/* ===== DATA ===== */
+var serverCoins=[],usdKrw=0,binancePrices={},premiums=[];
+var refreshTimer=30;
+var fmtPct=function(v){return v!=null?(v>0?'+':'')+v.toFixed(2)+'%':'—';};
+var pCls=function(v){return v>0?'pos':v<0?'neg':'neu';};
+
+async function loadServerData(){
+  try{var r=await fetch('data/coins.json?t='+Date.now());var d=await r.json();serverCoins=d.coins||[];usdKrw=d.usd_krw||1450;
+    document.getElementById('sServer').textContent='✓ '+serverCoins.length+'개';document.getElementById('sServer').className='ok';
+    document.getElementById('rateDisplay').textContent=usdKrw.toFixed(0)+'원';return true;
+  }catch(e){document.getElementById('sServer').textContent='✗ 실패';document.getElementById('sServer').className='fl';return false;}
+}
+
+async function fetchBinance(){
+  try{var r=await fetch('https://api.binance.com/api/v3/ticker/price');if(!r.ok)return false;var d=await r.json();binancePrices={};
+    d.forEach(function(t){if(t.symbol.endsWith('USDT'))binancePrices[t.symbol.replace('USDT','')]=parseFloat(t.price);});
+    document.getElementById('sBn').textContent='✓ 실시간';document.getElementById('sBn').className='ok';return true;
+  }catch(e){document.getElementById('sBn').textContent='✗ 차단';document.getElementById('sBn').className='fl';return false;}
+}
+
+function calculate(){
+  premiums=[];
+  for(var i=0;i<serverCoins.length;i++){
+    var coin=serverCoins[i],sym=coin.symbol,bn=binancePrices[sym];
+    if(!bn||bn<=0)continue;
+    var e={symbol:sym,name:coin.name||sym,image:coin.image||'',rank:coin.market_cap_rank||999,bn_usd:bn};
+    if(coin.upbit_krw&&usdKrw>0){e.up_krw=coin.upbit_krw;e.up_prem=((coin.upbit_krw/usdKrw)-bn)/bn*100;}
+    if(coin.bithumb_krw&&usdKrw>0){e.bt_krw=coin.bithumb_krw;e.bt_prem=((coin.bithumb_krw/usdKrw)-bn)/bn*100;}
+    if(coin.coinbase_usd){var cp=(coin.coinbase_usd-bn)/bn*100;if(Math.abs(cp)<=10){e.cb_usd=coin.coinbase_usd;e.cb_prem=cp;}}
+    var vals=[e.up_prem,e.bt_prem,e.cb_prem].filter(function(v){return v!=null;});
+    if(vals.length>0){e.max_prem=Math.max.apply(null,vals);e.min_prem=Math.min.apply(null,vals);}
+    premiums.push(e);
+  }
+  var btc=premiums.find(function(p){return p.symbol==='BTC';});
+  if(btc){
+    if(btc.up_prem!=null)document.getElementById('btcKimchi').innerHTML='<span class="'+pCls(btc.up_prem)+'">'+fmtPct(btc.up_prem)+'</span>';
+    if(btc.cb_prem!=null)document.getElementById('btcCB').innerHTML='<span class="'+pCls(btc.cb_prem)+'">'+fmtPct(btc.cb_prem)+'</span>';
+  }
+}
+
+function sigItem(c){
+  return '<div class="sig-item"><div class="sig-row1"><img src="'+c.image+'" onerror="this.style.display=\'none\'"><span class="sym">'+c.symbol+'</span></div><div class="sig-row2">'
+    +(c.up_prem!=null?'<span><span class="ex">업비트</span> <span class="val '+pCls(c.up_prem)+'">'+fmtPct(c.up_prem)+'</span></span>':'')
+    +(c.bt_prem!=null?'<span><span class="ex">빗썸</span> <span class="val '+pCls(c.bt_prem)+'">'+fmtPct(c.bt_prem)+'</span></span>':'')
+    +(c.cb_prem!=null?'<span><span class="ex">코인베이스</span> <span class="val '+pCls(c.cb_prem)+'">'+fmtPct(c.cb_prem)+'</span></span>':'')
+    +'</div></div>';
+}
+
+function renderBanner(){
+  var w=premiums.filter(function(p){return p.max_prem!=null;});
+  if(!w.length)return;
+  var top5=w.slice().sort(function(a,b){return b.max_prem-a.max_prem;}).slice(0,5);
+  var bot5=w.slice().sort(function(a,b){return a.min_prem-b.min_prem;}).slice(0,5);
+  document.getElementById('topList').innerHTML=top5.map(sigItem).join('');
+  document.getElementById('botList').innerHTML=bot5.map(sigItem).join('');
+}
+
+async function refresh(){await fetchBinance();calculate();renderBanner();refreshTimer=30;sendHeight();}
+async function init(){await loadServerData();await refresh();setInterval(function(){refreshTimer--;document.getElementById('countdown').textContent=refreshTimer+'s';if(refreshTimer<=0)refresh();},1000);setInterval(loadServerData,300000);}
+
+/* IFRAME RESIZE */
+var _lastH=0,_ht;
+function sendHeight(){clearTimeout(_ht);_ht=setTimeout(function(){var h=document.body.offsetHeight;if(Math.abs(h-_lastH)>5){_lastH=h;window.parent.postMessage({type:'resize',height:h},'*');}},150);}
+window.addEventListener('resize',sendHeight);
+window.addEventListener('load',function(){sendHeight();setTimeout(sendHeight,500);setTimeout(sendHeight,1500);});
+new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true});
+window.addEventListener('message',function(e){if(e.data&&e.data.type==='requestResize'){_lastH=0;sendHeight();}});
+
+init();
+</script>
+</body>
+</html>

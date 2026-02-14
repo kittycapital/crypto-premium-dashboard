@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>전체 코인 프리미엄 | Herdvibe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.1/kakao.min.js" crossorigin="anonymous" async></script>
+<style>
+:root {
+  --hv-primary:#3b82f6;--hv-primary-light:#60a5fa;--hv-primary-dark:#2563eb;
+  --hv-primary-glow:rgba(59,130,246,0.12);
+  --hv-up:#22c55e;--hv-up-bg:rgba(34,197,94,0.1);
+  --hv-down:#ef4444;--hv-down-bg:rgba(239,68,68,0.1);
+  --hv-warning:#f59e0b;--hv-warning-bg:rgba(245,158,11,0.1);
+  --hv-neutral:#6b7280;
+  --hv-bg-base:#000;--hv-bg-surface:#0a0a0a;--hv-bg-card:#111;
+  --hv-bg-card-hover:#181818;--hv-bg-elevated:#1a1a1a;
+  --hv-text-primary:#e5e5e5;--hv-text-secondary:#8a8a8a;
+  --hv-text-tertiary:#555;--hv-text-muted:#3a3a3a;
+  --hv-border:rgba(255,255,255,0.06);--hv-border-strong:rgba(255,255,255,0.12);
+  --hv-font-display:'Plus Jakarta Sans',sans-serif;
+  --hv-font-body:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  --hv-font-mono:'JetBrains Mono','SF Mono',monospace;
+  --hv-space-xs:8px;--hv-space-sm:12px;--hv-space-md:16px;
+  --hv-space-lg:24px;--hv-space-xl:32px;
+  --hv-radius-sm:6px;--hv-radius-md:10px;--hv-radius-lg:14px;
+  --hv-shadow-sm:0 1px 3px rgba(0,0,0,.5);--hv-shadow-lg:0 8px 32px rgba(0,0,0,.7);
+  --hv-transition-fast:150ms ease;--hv-transition:250ms ease;
+  --hv-max-width:1280px;--hv-header-height:60px;
+  --blue:#4a9eff;--cyan:#00e5cc;--red:#ff4a6a;--orange:#ff8c42;
+  --yellow:#ffd642;--green:#42ff8c;--purple:#a855f7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--hv-font-body);background:var(--hv-bg-base);color:var(--hv-text-primary);line-height:1.6;min-height:100vh;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}
+body::-webkit-scrollbar{display:none}
+::selection{background:var(--hv-primary);color:#fff}
+
+/* HEADER */
+.hv-header{position:sticky;top:0;z-index:100;height:var(--hv-header-height);background:rgba(0,0,0,.9);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--hv-border);display:flex;align-items:center;padding:0 var(--hv-space-lg)}
+.hv-header-inner{width:100%;max-width:var(--hv-max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--hv-space-md)}
+.hv-header-center{display:flex;flex-direction:column;min-width:0}
+.hv-header-center h1{font-family:var(--hv-font-display);font-size:.938rem;font-weight:600;color:var(--hv-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hv-header-category{font-size:.7rem;color:var(--hv-text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.hv-header-right{display:flex;align-items:center;gap:var(--hv-space-xs);flex-shrink:0}
+.hv-update-badge{font-family:var(--hv-font-mono);font-size:.688rem;color:var(--hv-text-tertiary);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.hv-live-dot{width:5px;height:5px;background:var(--hv-up);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* PAGE */
+.hv-page{max-width:var(--hv-max-width);margin:0 auto;padding:var(--hv-space-lg)}
+.dash-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:var(--hv-bg-card);border:1px solid var(--hv-border);border-radius:var(--hv-radius-lg);padding:18px 20px 16px;position:relative;overflow:visible;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card-label{font-family:var(--hv-font-mono);font-size:10px;font-weight:500;color:var(--hv-text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.card-title{font-size:15px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:7px}
+.card-desc{font-size:11.5px;color:var(--hv-text-secondary);margin-bottom:14px;line-height:1.5}
+.s12{grid-column:span 12}.s8{grid-column:span 8}.s6{grid-column:span 6}.s4{grid-column:span 4}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:5px 12px;border-radius:6px;font-family:var(--hv-font-mono);font-size:10.5px;font-weight:500;color:var(--hv-text-muted);background:transparent;border:1px solid transparent;cursor:pointer;transition:all .2s;user-select:none}
+.tab:hover{color:var(--hv-text-secondary);background:rgba(255,255,255,.03)}
+.tab.active{color:var(--cyan);background:rgba(0,229,204,.08);border-color:rgba(0,229,204,.2)}
+
+/* STATS */
+.stats{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.02);border:1px solid var(--hv-border);border-radius:8px;padding:10px 14px;min-width:0;flex:1}
+.stat-val{font-family:var(--hv-font-mono);font-size:20px;font-weight:700;line-height:1.2}
+.stat-sub{font-size:10px;color:var(--hv-text-secondary);margin-top:1px}
+.up{color:var(--green)}.dn{color:var(--red)}.neu{color:var(--hv-text-muted)}
+
+/* KPI MAJOR */
+.major-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.major-kpi{background:rgba(255,255,255,.02);border:1px solid var(--hv-border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.major-kpi:hover{border-color:var(--hv-border-strong);background:var(--hv-bg-card-hover)}
+.major-kpi.selected{border-color:var(--cyan);background:rgba(0,229,204,.05)}
+.major-kpi-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.major-kpi-head img{width:20px;height:20px;border-radius:50%}
+.major-kpi-head .sym{font-family:var(--hv-font-mono);font-weight:700;font-size:13px}
+.major-kpi-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}
+.major-kpi-row .label{color:var(--hv-text-tertiary)}
+.major-kpi-row .value{font-family:var(--hv-font-mono);font-weight:600}
+
+/* AVG STATS */
+.avg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.avg-stat{background:rgba(255,255,255,.02);border:1px solid var(--hv-border);border-radius:8px;padding:12px 14px;text-align:center}
+.avg-label{font-family:var(--hv-font-mono);font-size:10px;color:var(--cyan);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.avg-val{font-family:var(--hv-font-mono);font-size:22px;font-weight:700}
+.avg-sub{font-size:10px;color:var(--hv-text-secondary);margin-top:3px}
+
+/* CHART */
+.chart-wrap{position:relative;width:100%;height:300px}
+.chart-wrap canvas{width:100%!important;height:100%!important}
+.chart-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.chart-coin{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700}
+.chart-coin img{width:24px;height:24px;border-radius:50%}
+.chart-stats{display:flex;gap:16px;font-size:12px}
+.chart-stats .st{display:flex;flex-direction:column;align-items:center}
+.chart-stats .sl{font-size:10px;color:var(--hv-text-tertiary)}
+.chart-stats .sv{font-family:var(--hv-font-mono);font-weight:600;font-size:13px}
+
+/* TABLE */
+.search-wrap{position:relative;margin-bottom:14px}
+.search-input{width:100%;padding:10px 14px 10px 38px;background:var(--hv-bg-elevated);border:1px solid var(--hv-border);border-radius:8px;color:var(--hv-text-primary);font-size:14px;font-family:var(--hv-font-body);outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--blue)}
+.search-input::placeholder{color:var(--hv-text-tertiary)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--hv-text-tertiary);font-size:14px;pointer-events:none}
+.search-count{font-size:11px;color:var(--hv-text-tertiary);margin-top:6px}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ctable{width:100%;border-collapse:collapse;min-width:680px}
+.ctable th{padding:10px 12px;font-size:11px;font-weight:600;color:var(--hv-text-secondary);letter-spacing:.3px;border-bottom:1px solid var(--hv-border);text-align:right;white-space:nowrap;cursor:pointer;user-select:none}
+.ctable th:first-child{text-align:center;width:40px}
+.ctable th:nth-child(2){text-align:left}
+.ctable th:hover{color:var(--hv-text-primary);background:var(--hv-bg-elevated)}
+.ctable th.sorted{color:var(--blue)}
+.sort-icon{font-size:10px;margin-left:2px;opacity:.3}
+.ctable th.sorted .sort-icon{opacity:1;color:var(--blue)}
+.ctable td{padding:11px 12px;border-bottom:1px solid var(--hv-border);text-align:right;font-family:var(--hv-font-mono);font-size:13px;white-space:nowrap;color:var(--hv-text-primary)}
+.ctable td:first-child{text-align:center;color:var(--hv-text-tertiary);font-size:12px;width:40px}
+.ctable td:nth-child(2){text-align:left;font-family:var(--hv-font-body)}
+.ctable tr:hover td{background:var(--hv-bg-card-hover)}
+.ctable tr{cursor:pointer}
+.cc{display:flex;align-items:center;gap:10px}
+.cc img{width:22px;height:22px;border-radius:50%}
+.cc .sym{font-family:var(--hv-font-mono);font-weight:700;font-size:13px}
+.cc .nm{color:var(--hv-text-secondary);font-size:11px;margin-left:4px}
+.prem-cell{font-weight:600;font-size:13px}
+.prem-cell.pos{color:var(--green)}.prem-cell.neg{color:var(--red)}
+.lc{color:var(--hv-text-tertiary);font-size:11px;font-style:italic;font-weight:400}
+.loading{display:flex;align-items:center;justify-content:center;height:120px;color:var(--hv-text-tertiary);font-size:13px}
+.spinner{width:16px;height:16px;border:2px solid var(--hv-border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-right:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RATE BAR */
+.rate-bar{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.rate-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--hv-text-secondary)}
+.rate-val{font-family:var(--hv-font-mono);font-weight:600;color:var(--hv-text-primary);font-size:13px}
+.status-bar{display:flex;gap:14px;font-size:10px;color:var(--hv-text-tertiary);flex-wrap:wrap}
+.ok{color:var(--green)}.ld{color:var(--orange)}.fl{color:var(--red)}
+.pos{color:var(--green)}.neg{color:var(--red)}
+
+/* SHARE BAR */
+.share-bar{display:flex;align-items:center;justify-content:space-between;padding:12px var(--hv-space-lg);border-top:1px solid var(--hv-border);background:var(--hv-bg-surface);border-radius:0 0 var(--hv-radius-lg) var(--hv-radius-lg)}
+.share-bar-preview{font-size:.75rem;color:var(--hv-text-tertiary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:50%;line-height:1.4;font-family:var(--hv-font-mono)}
+.share-bar-preview span{color:var(--hv-text-secondary);font-weight:500}
+.share-bar-buttons{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.share-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;font-size:.75rem;font-weight:600;font-family:var(--hv-font-body);cursor:pointer;transition:all var(--hv-transition-fast);border:1px solid var(--hv-border-strong);background:var(--hv-bg-card);color:#999;white-space:nowrap}
+.share-btn:hover{transform:translateY(-1px);box-shadow:var(--hv-shadow-sm);color:var(--hv-text-primary)}
+.share-btn svg{flex-shrink:0}
+.share-btn--x:hover{border-color:#fff;color:#fff;background:#111}
+.share-btn--kakao:hover{border-color:#FEE500;color:#191919;background:#FEE500}
+.share-btn--tg:hover{border-color:#26A5E4;color:#fff;background:rgba(38,165,228,.15)}
+.share-btn--ig:hover{border-color:#E4405F;color:#fff;background:rgba(228,64,95,.15)}
+.share-btn--copy:hover{border-color:var(--hv-primary);color:var(--hv-primary-light);background:var(--hv-primary-glow)}
+
+.toast-wrap{position:fixed;bottom:20px;right:20px;z-index:200;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--hv-bg-elevated);border:1px solid var(--hv-border-strong);border-radius:var(--hv-radius-md);padding:10px 18px;font-size:.788rem;color:var(--hv-text-primary);box-shadow:var(--hv-shadow-lg);animation:toastIn .3s ease;border-left:3px solid var(--hv-up)}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1024px){.s8,.s6,.s4{grid-column:span 12}.major-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){
+  :root{--hv-header-height:52px}
+  .hv-page{padding:var(--hv-space-md)}.hv-header{padding:0 var(--hv-space-md)}
+  .hv-update-badge{display:none}.dash-grid{gap:10px}
+  .card{padding:14px 14px 12px}.card-title{font-size:14px}
+  .major-grid{grid-template-columns:repeat(2,1fr)}.avg-grid{grid-template-columns:1fr 1fr 1fr}
+  .chart-wrap{height:240px}
+  .share-bar{flex-direction:column;gap:10px;align-items:stretch}
+  .share-bar-preview{max-width:100%}
+  .share-bar-buttons{justify-content:center;flex-wrap:wrap}
+  .share-btn span.label-text{display:none}.share-btn{padding:8px 10px}
+}
+@media(max-width:520px){.hv-page{padding:12px 10px 24px}.major-grid{grid-template-columns:1fr 1fr}.avg-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hv-header">
+  <div class="hv-header-inner">
+    <div class="hv-header-center">
+      <h1>🇰🇷 전체 코인 프리미엄</h1>
+      <span class="hv-header-category">Premium · Full Dashboard</span>
+    </div>
+    <div class="hv-header-right">
+      <div class="hv-update-badge"><span class="hv-live-dot"></span><span id="countdown">30s</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="hv-page">
+  <div class="dash-grid">
+
+    <!-- RATE BAR -->
+    <div class="card s12">
+      <div class="card-label">MARKET RATES</div>
+      <div class="rate-bar">
+        <div class="rate-item">USD/KRW: <span class="rate-val" id="rateDisplay">—</span></div>
+        <div class="rate-item">BTC 김치: <span class="rate-val" id="btcKimchi">—</span></div>
+        <div class="rate-item">BTC 코인베이스: <span class="rate-val" id="btcCB">—</span></div>
+      </div>
+      <div class="status-bar">
+        <span>서버: <span id="sServer" class="ld">···</span></span>
+        <span>Binance: <span id="sBn" class="ld">···</span></span>
+      </div>
+    </div>
+
+    <!-- MAJOR 5 -->
+    <div class="card s12">
+      <div class="card-label">MAJOR COINS</div>
+      <div class="card-title">🏆 메이저 코인 프리미엄</div>
+      <div class="card-desc">BTC, ETH, XRP, BNB, SOL — 클릭하면 차트 전환</div>
+      <div class="major-grid" id="majorGrid"></div>
+    </div>
+
+    <!-- TOP 50 AVG -->
+    <div class="card s12">
+      <div class="card-label">TOP 50 AVERAGE</div>
+      <div class="card-title">📊 시총 TOP 50 평균 프리미엄</div>
+      <div class="avg-grid" id="avgGrid">
+        <div class="avg-stat"><div class="avg-label">업비트 평균</div><div class="avg-val" id="avgUpbit">—</div><div class="avg-sub">김치 프리미엄</div></div>
+        <div class="avg-stat"><div class="avg-label">빗썸 평균</div><div class="avg-val" id="avgBithumb">—</div><div class="avg-sub">김치 프리미엄</div></div>
+        <div class="avg-stat"><div class="avg-label">코인베이스 평균</div><div class="avg-val" id="avgCoinbase">—</div><div class="avg-sub">코인베이스 프리미엄</div></div>
+      </div>
+    </div>
+
+    <!-- CHART -->
+    <div class="card s12" id="chartCard">
+      <div class="card-label">PREMIUM HISTORY</div>
+      <div class="card-title">📈 프리미엄 추이</div>
+      <div class="card-desc">코인별 김치/코인베이스 프리미엄 히스토리</div>
+      <div class="tabs" id="periodTabs">
+        <div class="tab active" data-period="1">1일</div>
+        <div class="tab" data-period="7">1주</div>
+        <div class="tab" data-period="30">1달</div>
+      </div>
+      <div class="chart-header" id="chartHeader"></div>
+      <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+    </div>
+
+    <!-- FULL TABLE -->
+    <div class="card s12">
+      <div class="card-label">ALL COINS</div>
+      <div class="card-title">📋 전체 코인 프리미엄</div>
+      <div class="card-desc">기준: Binance USDT (실시간) · 프리미엄 = (거래소 − Binance) / Binance × 100</div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="coinSearch" placeholder="코인 검색 (이름 또는 심볼)" autocomplete="off">
+        <div class="search-count" id="searchCount"></div>
+      </div>
+      <div class="twrap" id="tableWrap"><div class="loading"><div class="spinner"></div>데이터 로딩 중...</div></div>
+    </div>
+
+  </div>
+
+  <!-- SHARE BAR -->
+  <div style="background:var(--hv-bg-card);border:1px solid var(--hv-border);border-radius:var(--hv-radius-lg);margin-top:var(--hv-space-lg);overflow:hidden">
+    <div class="share-bar" style="border-top:none">
+      <div class="share-bar-preview"><span>전체 코인 프리미엄</span> — herdvibe.com</div>
+      <div class="share-bar-buttons">
+        <button class="share-btn share-btn--x" onclick="doShare('twitter')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span class="label-text">트위터</span></button>
+        <button class="share-btn share-btn--kakao" onclick="doShare('kakao')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.463 2 10.691c0 2.724 1.8 5.112 4.508 6.458l-1.148 4.265a.5.5 0 0 0 .764.533l4.94-3.26c.304.02.612.03.936.03 5.523 0 10-3.462 10-7.735C22 6.463 17.523 3 12 3z"/></svg><span class="label-text">카카오톡</span></button>
+        <button class="share-btn share-btn--tg" onclick="doShare('telegram')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="label-text">텔레그램</span></button>
+        <button class="share-btn share-btn--ig" onclick="doShare('instagram',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span class="label-text">인스타</span></button>
+        <button class="share-btn share-btn--copy" onclick="doShare('link',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span class="label-text">링크 복사</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== SHARE ===== */
+var SHARE_URL='https://herdvibe.com/44';
+function ensureKakao(){try{if(typeof Kakao!=='undefined'&&!Kakao.isInitialized())Kakao.init('a43ed7b39fac35458f4f9df925a279b5');return typeof Kakao!=='undefined'&&Kakao.isInitialized();}catch(e){return false;}}
+ensureKakao();
+function copyToClipboard(t){try{window.parent.postMessage({type:'clipboard',text:t},'*');}catch(e){}try{navigator.clipboard.writeText(t);}catch(e){}}
+function flashCopied(btn){if(!btn)return;var o=btn.innerHTML;btn.style.background='#22c55e';btn.style.color='#fff';btn.style.borderColor='#22c55e';var hl=btn.querySelector('.label-text');btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>'+(hl?'<span class="label-text" style="color:#fff">복사됨!</span>':'');setTimeout(function(){btn.style.background='';btn.style.color='';btn.style.borderColor='';btn.innerHTML=o;},2000);}
+function doShare(p,btn){var u=SHARE_URL,t=encodeURIComponent('전체 코인 프리미엄 | herdvibe.com'),eu=encodeURIComponent(u);switch(p){case'twitter':window.open('https://twitter.com/intent/tweet?text='+t+'&url='+eu,'_blank');break;case'telegram':window.open('https://t.me/share/url?url='+eu+'&text='+t,'_blank');break;case'kakao':if(!ensureKakao()){copyToClipboard(u);toast('링크 복사완료!');}else try{Kakao.Share.sendDefault({objectType:'feed',content:{title:'전체 코인 프리미엄',description:'김치/코인베이스 프리미엄 전체 코인 분석',imageUrl:'https://raw.githubusercontent.com/kittycapital/kittycapital.github.io/main/assets/herdvibe-og.png',link:{mobileWebUrl:u,webUrl:u}},buttons:[{title:'대시보드 보기',link:{mobileWebUrl:u,webUrl:u}}]});}catch(e){copyToClipboard(u);toast('링크 복사완료!');}break;case'instagram':copyToClipboard(u);flashCopied(btn);toast('링크 복사완료! 인스타그램에 붙여넣기 하세요');break;case'link':copyToClipboard(u);flashCopied(btn);toast('링크가 복사되었습니다 ✓');break;}}
+function toast(m){var c=document.querySelector('.toast-wrap');if(!c){c=document.createElement('div');c.className='toast-wrap';document.body.appendChild(c);}var t=document.createElement('div');t.className='toast';t.textContent=m;c.appendChild(t);setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(12px)';t.style.transition='.3s';setTimeout(function(){t.remove();},300);},3000);}
+
+/* ===== WATERMARK ===== */
+var watermarkPlugin={id:'herdvibeWatermark',beforeDraw:function(ch){var ctx=ch.ctx,ca=ch.chartArea;if(!ca)return;ctx.save();ctx.font='700 28px "Plus Jakarta Sans",sans-serif';ctx.fillStyle='rgba(255,255,255,0.03)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Herdvibe.com',(ca.left+ca.right)/2,(ca.top+ca.bottom)/2);ctx.restore();}};
+Chart.register(watermarkPlugin);
+Chart.defaults.font.family="'JetBrains Mono','Noto Sans KR',monospace";
+Chart.defaults.font.size=10;Chart.defaults.color='#3a3a52';
+Chart.defaults.elements.point.radius=0;Chart.defaults.elements.point.hoverRadius=4;
+Chart.defaults.elements.line.borderWidth=2;Chart.defaults.animation.duration=600;
+Chart.defaults.responsive=true;Chart.defaults.maintainAspectRatio=false;
+var gridColor='rgba(255,255,255,0.04)';
+
+/* ===== DATA ===== */
+var serverCoins=[],usdKrw=0,binancePrices={},premiums=[],historyData=[];
+var selectedCoin='BTC',mainChart=null,sortState={col:'rank',dir:'asc'},searchQuery='',refreshTimer=30,chartPeriod=1;
+var MAJORS=['BTC','ETH','XRP','BNB','SOL'];
+
+var fmtUSD=function(v){return v>=1000?'$'+v.toLocaleString('en-US',{maximumFractionDigits:0}):v>=1?'$'+v.toFixed(2):v>=0.01?'$'+v.toFixed(4):'$'+v.toFixed(6);};
+var fmtPct=function(v){return v!=null?(v>0?'+':'')+v.toFixed(2)+'%':'—';};
+var pCls=function(v){return v>0?'pos':v<0?'neg':'neu';};
+
+async function loadServerData(){
+  try{var r=await fetch('data/coins.json?t='+Date.now());var d=await r.json();serverCoins=d.coins||[];usdKrw=d.usd_krw||1450;
+    document.getElementById('sServer').textContent='✓ '+serverCoins.length+'개';document.getElementById('sServer').className='ok';
+    document.getElementById('rateDisplay').textContent=usdKrw.toFixed(0)+'원';return true;
+  }catch(e){document.getElementById('sServer').textContent='✗ 실패';document.getElementById('sServer').className='fl';return false;}
+}
+
+async function fetchBinance(){
+  try{var r=await fetch('https://api.binance.com/api/v3/ticker/price');if(!r.ok)return false;var d=await r.json();binancePrices={};
+    d.forEach(function(t){if(t.symbol.endsWith('USDT'))binancePrices[t.symbol.replace('USDT','')]=parseFloat(t.price);});
+    document.getElementById('sBn').textContent='✓ 실시간';document.getElementById('sBn').className='ok';return true;
+  }catch(e){document.getElementById('sBn').textContent='✗ 차단';document.getElementById('sBn').className='fl';return false;}
+}
+
+function calculate(){
+  premiums=[];
+  for(var i=0;i<serverCoins.length;i++){
+    var coin=serverCoins[i],sym=coin.symbol,bn=binancePrices[sym];
+    if(!bn||bn<=0)continue;
+    var e={symbol:sym,name:coin.name||sym,image:coin.image||'',rank:coin.market_cap_rank||999,bn_usd:bn};
+    if(coin.upbit_krw&&usdKrw>0){e.up_krw=coin.upbit_krw;e.up_prem=((coin.upbit_krw/usdKrw)-bn)/bn*100;}
+    if(coin.bithumb_krw&&usdKrw>0){e.bt_krw=coin.bithumb_krw;e.bt_prem=((coin.bithumb_krw/usdKrw)-bn)/bn*100;}
+    if(coin.coinbase_usd){var cp=(coin.coinbase_usd-bn)/bn*100;if(Math.abs(cp)<=10){e.cb_usd=coin.coinbase_usd;e.cb_prem=cp;}}
+    var vals=[e.up_prem,e.bt_prem,e.cb_prem].filter(function(v){return v!=null;});
+    if(vals.length>0){e.max_prem=Math.max.apply(null,vals);e.min_prem=Math.min.apply(null,vals);}
+    premiums.push(e);
+  }
+  var btc=premiums.find(function(p){return p.symbol==='BTC';});
+  if(btc){
+    if(btc.up_prem!=null)document.getElementById('btcKimchi').innerHTML='<span class="'+pCls(btc.up_prem)+'">'+fmtPct(btc.up_prem)+'</span>';
+    if(btc.cb_prem!=null)document.getElementById('btcCB').innerHTML='<span class="'+pCls(btc.cb_prem)+'">'+fmtPct(btc.cb_prem)+'</span>';
+  }
+}
+
+/* MAJOR 5 */
+function renderMajors(){
+  var html='';
+  MAJORS.forEach(function(sym){
+    var c=premiums.find(function(p){return p.symbol===sym;});
+    if(!c)return;
+    html+='<div class="major-kpi'+(selectedCoin===sym?' selected':'')+'" onclick="selectCoin(\''+sym+'\')">'
+      +'<div class="major-kpi-head"><img src="'+c.image+'" onerror="this.style.display=\'none\'"><span class="sym">'+sym+'</span></div>'
+      +(c.up_prem!=null?'<div class="major-kpi-row"><span class="label">업비트</span><span class="value '+pCls(c.up_prem)+'">'+fmtPct(c.up_prem)+'</span></div>':'')
+      +(c.bt_prem!=null?'<div class="major-kpi-row"><span class="label">빗썸</span><span class="value '+pCls(c.bt_prem)+'">'+fmtPct(c.bt_prem)+'</span></div>':'')
+      +(c.cb_prem!=null?'<div class="major-kpi-row"><span class="label">코인베이스</span><span class="value '+pCls(c.cb_prem)+'">'+fmtPct(c.cb_prem)+'</span></div>':'')
+      +'</div>';
+  });
+  document.getElementById('majorGrid').innerHTML=html||'<div class="loading">메이저 코인 데이터 없음</div>';
+}
+
+/* TOP 50 AVG */
+function renderAvg(){
+  var top50=premiums.filter(function(p){return p.rank<=50;});
+  var upVals=top50.map(function(p){return p.up_prem;}).filter(function(v){return v!=null;});
+  var btVals=top50.map(function(p){return p.bt_prem;}).filter(function(v){return v!=null;});
+  var cbVals=top50.map(function(p){return p.cb_prem;}).filter(function(v){return v!=null;});
+  var avg=function(arr){return arr.length?arr.reduce(function(a,b){return a+b;},0)/arr.length:null;};
+  var au=avg(upVals),ab=avg(btVals),ac=avg(cbVals);
+  var el1=document.getElementById('avgUpbit');el1.textContent=au!=null?fmtPct(au):'—';el1.className='avg-val '+(au!=null?pCls(au):'');
+  var el2=document.getElementById('avgBithumb');el2.textContent=ab!=null?fmtPct(ab):'—';el2.className='avg-val '+(ab!=null?pCls(ab):'');
+  var el3=document.getElementById('avgCoinbase');el3.textContent=ac!=null?fmtPct(ac):'—';el3.className='avg-val '+(ac!=null?pCls(ac):'');
+}
+
+/* CHART */
+function selectCoin(sym){selectedCoin=sym;renderMajors();renderChart();}
+
+async function loadHistory(){
+  historyData=[];
+  var today=new Date();
+  for(var i=0;i<30;i++){
+    var d=new Date(today);d.setDate(d.getDate()-i);
+    var fname=d.toISOString().slice(0,10)+'.json';
+    try{var r=await fetch('data/history/'+fname);if(r.ok){historyData.push.apply(historyData,await r.json());}}catch(e){}
+  }
+  historyData.sort(function(a,b){return a.timestamp.localeCompare(b.timestamp);});
+}
+
+function renderChart(){
+  var c=premiums.find(function(p){return p.symbol===selectedCoin;});
+  if(!c)return;
+  document.getElementById('chartHeader').innerHTML='<div class="chart-coin"><img src="'+c.image+'" onerror="this.style.display=\'none\'">'+selectedCoin+' 프리미엄 추이</div>'
+    +'<div class="chart-stats">'
+    +(c.up_prem!=null?'<div class="st"><span class="sl">업비트</span><span class="sv '+pCls(c.up_prem)+'">'+fmtPct(c.up_prem)+'</span></div>':'')
+    +(c.bt_prem!=null?'<div class="st"><span class="sl">빗썸</span><span class="sv '+pCls(c.bt_prem)+'">'+fmtPct(c.bt_prem)+'</span></div>':'')
+    +(c.cb_prem!=null?'<div class="st"><span class="sl">코인베이스</span><span class="sv '+pCls(c.cb_prem)+'">'+fmtPct(c.cb_prem)+'</span></div>':'')
+    +'</div>';
+
+  var cutoff=new Date();cutoff.setDate(cutoff.getDate()-chartPeriod);
+  var filtered=historyData.filter(function(h){return new Date(h.timestamp)>=cutoff&&h.coins&&h.coins[selectedCoin];});
+  if(!filtered.length){
+    if(mainChart){mainChart.destroy();mainChart=null;}
+    var cv=document.getElementById('mainChart');cv.parentNode.innerHTML='<div class="loading" style="height:300px">히스토리 데이터가 아직 없습니다</div>';
+    return;
+  }
+  var wrap=document.getElementById('mainChart');
+  if(!wrap||wrap.tagName!=='CANVAS'){document.querySelector('.chart-wrap').innerHTML='<canvas id="mainChart"></canvas>';wrap=document.getElementById('mainChart');}
+
+  var labels=filtered.map(function(h){var d=new Date(h.timestamp);return(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');});
+  var upData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.up_krw||!co.cb_usd||!h.usd_krw)return null;return((co.up_krw/h.usd_krw-co.cb_usd)/co.cb_usd*100);});
+  var btData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.bt_krw||!co.cb_usd||!h.usd_krw)return null;return((co.bt_krw/h.usd_krw-co.cb_usd)/co.cb_usd*100);});
+
+  if(mainChart)mainChart.destroy();
+  mainChart=new Chart(wrap,{type:'line',data:{labels:labels,datasets:[
+    {label:'업비트',data:upData,borderColor:'#00e5cc',backgroundColor:'rgba(0,229,204,0.08)',fill:false,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,spanGaps:true},
+    {label:'빗썸',data:btData,borderColor:'#a855f7',backgroundColor:'rgba(168,85,247,0.08)',fill:false,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,spanGaps:true},
+    {label:'0%',data:filtered.map(function(){return 0;}),borderColor:'rgba(255,255,255,0.1)',borderDash:[4,4],pointRadius:0,borderWidth:1,fill:false}
+  ]},options:{interaction:{intersect:false,mode:'index'},
+    plugins:{legend:{labels:{boxWidth:10,padding:12,font:{size:10},color:'#6e6e88',filter:function(i){return i.text!=='0%';}}},
+      tooltip:{backgroundColor:'rgba(10,10,10,0.95)',titleColor:'#e5e5e5',bodyColor:'#8a8a8a',borderColor:'rgba(255,255,255,0.08)',borderWidth:1,cornerRadius:6,
+        callbacks:{label:function(i){return i.dataset.label!=='0%'?i.dataset.label+': '+(i.raw!=null?i.raw.toFixed(2)+'%':'—'):null;},filter:function(i){return i.dataset.label!=='0%';}}}},
+    scales:{x:{grid:{color:gridColor,drawBorder:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:8,color:'#555',font:{size:9}}},
+      y:{grid:{color:gridColor,drawBorder:false},ticks:{color:'#555',font:{size:9},callback:function(v){return v.toFixed(1)+'%';}}}}
+  }});
+  sendHeight();
+}
+
+/* TABLE */
+function renderTable(){
+  var data=premiums.slice();
+  if(searchQuery){var q=searchQuery.toLowerCase();data=data.filter(function(c){return c.symbol.toLowerCase().includes(q)||c.name.toLowerCase().includes(q);});}
+  data=sortData(data,sortState.col,sortState.dir);
+  var countEl=document.getElementById('searchCount');
+  countEl.textContent=searchQuery?data.length+'개 코인 검색됨':'';
+
+  var si=function(c){return sortState.col===c?'<span class="sort-icon">'+(sortState.dir==='asc'?' ↑':' ↓')+'</span>':'<span class="sort-icon"> ↕</span>';};
+  var sc=function(c){return sortState.col===c?'sorted':'';};
+
+  var h='<table class="ctable"><thead><tr>'
+    +'<th onclick="doSort(\'rank\')" class="'+sc('rank')+'">#'+si('rank')+'</th>'
+    +'<th onclick="doSort(\'symbol\')" class="'+sc('symbol')+'">코인'+si('symbol')+'</th>'
+    +'<th onclick="doSort(\'bn_usd\')" class="'+sc('bn_usd')+'">가격'+si('bn_usd')+'</th>'
+    +'<th onclick="doSort(\'up_prem\')" class="'+sc('up_prem')+'">업비트'+si('up_prem')+'</th>'
+    +'<th onclick="doSort(\'bt_prem\')" class="'+sc('bt_prem')+'">빗썸'+si('bt_prem')+'</th>'
+    +'<th onclick="doSort(\'cb_prem\')" class="'+sc('cb_prem')+'">코인베이스'+si('cb_prem')+'</th>'
+    +'</tr></thead><tbody>';
+
+  data.forEach(function(c){
+    h+='<tr onclick="selectCoin(\''+c.symbol+'\')">'
+      +'<td>'+(c.rank<999?c.rank:'-')+'</td>'
+      +'<td><div class="cc"><img src="'+c.image+'" onerror="this.style.display=\'none\'"><span class="sym">'+c.symbol+'</span><span class="nm">'+c.name+'</span></div></td>'
+      +'<td>'+fmtUSD(c.bn_usd)+'</td>'
+      +'<td class="prem-cell '+(c.up_prem!=null?pCls(c.up_prem):'')+'">'+(c.up_prem!=null?fmtPct(c.up_prem):'<span class="lc">—</span>')+'</td>'
+      +'<td class="prem-cell '+(c.bt_prem!=null?pCls(c.bt_prem):'')+'">'+(c.bt_prem!=null?fmtPct(c.bt_prem):'<span class="lc">—</span>')+'</td>'
+      +'<td class="prem-cell '+(c.cb_prem!=null?pCls(c.cb_prem):'')+'">'+(c.cb_prem!=null?fmtPct(c.cb_prem):'<span class="lc">—</span>')+'</td>'
+      +'</tr>';
+  });
+  if(!data.length)h+='<tr><td colspan="6" style="text-align:center;color:var(--hv-text-tertiary);padding:24px;font-family:var(--hv-font-body)">검색 결과가 없습니다</td></tr>';
+  h+='</tbody></table>';
+  document.getElementById('tableWrap').innerHTML=h;
+}
+
+document.getElementById('coinSearch').addEventListener('input',function(){searchQuery=this.value.trim();renderTable();});
+
+function sortData(arr,col,dir){
+  return arr.sort(function(a,b){var va,vb;
+    switch(col){case'rank':va=a.rank||999;vb=b.rank||999;break;case'symbol':return dir==='asc'?a.symbol.localeCompare(b.symbol):b.symbol.localeCompare(a.symbol);
+    case'bn_usd':va=a.bn_usd||0;vb=b.bn_usd||0;break;case'up_prem':va=a.up_prem!=null?a.up_prem:-999;vb=b.up_prem!=null?b.up_prem:-999;break;
+    case'bt_prem':va=a.bt_prem!=null?a.bt_prem:-999;vb=b.bt_prem!=null?b.bt_prem:-999;break;case'cb_prem':va=a.cb_prem!=null?a.cb_prem:-999;vb=b.cb_prem!=null?b.cb_prem:-999;break;default:va=0;vb=0;}
+    return dir==='asc'?va-vb:vb-va;});
+}
+function doSort(col){if(sortState.col===col)sortState.dir=sortState.dir==='asc'?'desc':'asc';else{sortState.col=col;sortState.dir=col==='rank'?'asc':'desc';}renderTable();}
+
+/* TABS */
+document.querySelectorAll('#periodTabs .tab').forEach(function(t){
+  t.addEventListener('click',function(){document.querySelectorAll('#periodTabs .tab').forEach(function(x){x.classList.remove('active');});t.classList.add('active');chartPeriod=parseInt(t.dataset.period);renderChart();});
+});
+
+/* REFRESH */
+async function refresh(){await fetchBinance();calculate();renderMajors();renderAvg();renderChart();renderTable();refreshTimer=30;sendHeight();}
+async function init(){await loadServerData();loadHistory();await refresh();setInterval(function(){refreshTimer--;document.getElementById('countdown').textContent=refreshTimer+'s';if(refreshTimer<=0)refresh();},1000);setInterval(loadServerData,300000);}
+
+/* IFRAME RESIZE */
+var _lastH=0,_ht;
+function sendHeight(){clearTimeout(_ht);_ht=setTimeout(function(){var h=document.body.offsetHeight;if(Math.abs(h-_lastH)>5){_lastH=h;window.parent.postMessage({type:'resize',height:h},'*');}},150);}
+window.addEventListener('resize',sendHeight);
+window.addEventListener('load',function(){sendHeight();setTimeout(sendHeight,500);setTimeout(sendHeight,1500);});
+new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true});
+window.addEventListener('message',function(e){if(e.data&&e.data.type==='requestResize'){_lastH=0;sendHeight();}});
+
+init();
+</script>
+</body>
+</html>
