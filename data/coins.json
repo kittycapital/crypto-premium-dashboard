@@ -1,24 +1,24 @@
 {
-  "updated_at": "2026-02-14T19:52:19Z",
-  "usd_krw": 1469.57,
+  "updated_at": "2026-02-14T20:53:42Z",
+  "usd_krw": 1470.63,
   "coins": [
     {
       "symbol": "BTC",
       "name": "Bitcoin",
       "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
       "market_cap_rank": 1,
-      "upbit_krw": 102662000.0,
-      "bithumb_krw": 102593000.0,
-      "coinbase_usd": 69858.345
+      "upbit_krw": 102855000.0,
+      "bithumb_krw": 102868000.0,
+      "coinbase_usd": 69939.625
     },
     {
       "symbol": "ETH",
       "name": "Ethereum",
       "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
       "market_cap_rank": 2,
-      "upbit_krw": 3069000.0,
-      "bithumb_krw": 3068000.0,
-      "coinbase_usd": 2089.25
+      "upbit_krw": 3070000.0,
+      "bithumb_krw": 3071000.0,
+      "coinbase_usd": 2087.595
     },
     {
       "symbol": "USDT",
@@ -26,8 +26,8 @@
       "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
       "market_cap_rank": 3,
       "upbit_krw": 1469.0,
-      "bithumb_krw": 1468.0,
-      "coinbase_usd": 0.999585
+      "bithumb_krw": 1469.0,
+      "coinbase_usd": 0.999515
     },
     {
       "symbol": "XRP",
@@ -36,22 +36,22 @@
       "market_cap_rank": 4,
       "upbit_krw": 2199.0,
       "bithumb_krw": 2200.0,
-      "coinbase_usd": 1.49825
+      "coinbase_usd": 1.4943
     },
     {
       "symbol": "BNB",
       "name": "BNB",
       "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
       "market_cap_rank": 5,
-      "bithumb_krw": 929000.0,
-      "coinbase_usd": 632.835
+      "bithumb_krw": 928500.0,
+      "coinbase_usd": 631.315
     },
     {
       "symbol": "USDC",
       "name": "USDC",
       "image": "https://coin-images.coingecko.com/coins/images/6319/large/USDC.png?1769615602",
       "market_cap_rank": 6,
-      "upbit_krw": 1470.0,
+      "upbit_krw": 1471.0,
       "bithumb_krw": 1469.0,
       "coinbase_usd": 1.0
     },
@@ -60,17 +60,17 @@
       "name": "Solana",
       "image": "https://coin-images.coingecko.com/coins/images/4128/large/solana.png?1718769756",
       "market_cap_rank": 7,
-      "upbit_krw": 129700.0,
-      "bithumb_krw": 129600.0,
-      "coinbase_usd": 88.285
+      "upbit_krw": 129400.0,
+      "bithumb_krw": 129400.0,
+      "coinbase_usd": 88.035
     },
     {
       "symbol": "TRX",
       "name": "TRON",
       "image": "https://coin-images.coingecko.com/coins/images/1094/large/tron-logo.png?1696502193",
       "market_cap_rank": 8,
-      "upbit_krw": 416.0,
-      "bithumb_krw": 415.0
+      "upbit_krw": 415.0,
+      "bithumb_krw": 416.0
     },
     {
       "symbol": "DOGE",
@@ -79,25 +79,25 @@
       "market_cap_rank": 9,
       "upbit_krw": 160.0,
       "bithumb_krw": 160.0,
-      "coinbase_usd": 0.1092
+      "coinbase_usd": 0.10897
     },
     {
       "symbol": "BCH",
       "name": "Bitcoin Cash",
       "image": "https://coin-images.coingecko.com/coins/images/780/large/bitcoin-cash-circle.png?1696501932",
       "market_cap_rank": 11,
-      "upbit_krw": 834500.0,
-      "bithumb_krw": 836000.0,
-      "coinbase_usd": 568.725
+      "upbit_krw": 831000.0,
+      "bithumb_krw": 831500.0,
+      "coinbase_usd": 565.71
     },
     {
       "symbol": "ADA",
       "name": "Cardano",
       "image": "https://coin-images.coingecko.com/coins/images/975/large/cardano.png?1696502090",
       "market_cap_rank": 13,
-      "upbit_krw": 438.0,
-      "bithumb_krw": 439.0,
-      "coinbase_usd": 0.29875
+      "upbit_krw": 436.0,
+      "bithumb_krw": 437.0,
+      "coinbase_usd": 0.29695
     },
     {
       "symbol": "USDS",
@@ -105,23 +105,23 @@
       "image": "https://coin-images.coingecko.com/coins/images/39926/large/usds.webp?1726666683",
       "market_cap_rank": 14,
       "bithumb_krw": 1465.0,
-      "coinbase_usd": 0.9989
+      "coinbase_usd": 0.99925
     },
     {
       "symbol": "HYPE",
       "name": "Hyperliquid",
       "image": "https://coin-images.coingecko.com/coins/images/50882/large/hyperliquid.jpg?1729431300",
       "market_cap_rank": 16,
-      "coinbase_usd": 31.355
+      "coinbase_usd": 31.795
     },
     {
       "symbol": "LINK",
       "name": "Chainlink",
       "image": "https://coin-images.coingecko.com/coins/images/877/large/Chainlink_Logo_500.png?1760023405",
       "market_cap_rank": 18,
-      "upbit_krw": 13500.0,
-      "bithumb_krw": 13480.0,
-      "coinbase_usd": 9.177
+      "upbit_krw": 13420.0,
+      "bithumb_krw": 13410.0,
+      "coinbase_usd": 9.1265
     },
     {
       "symbol": "USDE",
@@ -136,16 +136,16 @@
       "name": "Stellar",
       "image": "https://coin-images.coingecko.com/coins/images/100/large/fmpFRHHQ_400x400.jpg?1735231350",
       "market_cap_rank": 21,
-      "upbit_krw": 259.0,
-      "bithumb_krw": 259.0,
-      "coinbase_usd": 0.176345
+      "upbit_krw": 256.0,
+      "bithumb_krw": 255.0,
+      "coinbase_usd": 0.173768
     },
     {
       "symbol": "USD1",
       "name": "USD1",
       "image": "https://coin-images.coingecko.com/coins/images/54977/large/USD1_1000x1000_transparent.png?1749297002",
       "market_cap_rank": 22,
-      "upbit_krw": 1468.0,
+      "upbit_krw": 1471.0,
       "bithumb_krw": 1469.0,
       "coinbase_usd": 0.99985
     },
@@ -154,30 +154,30 @@
       "name": "Zcash",
       "image": "https://coin-images.coingecko.com/coins/images/486/large/circle-zcash-color.png?1696501740",
       "market_cap_rank": 23,
-      "coinbase_usd": 318.33
+      "coinbase_usd": 312.44
     },
     {
       "symbol": "HBAR",
       "name": "Hedera",
       "image": "https://coin-images.coingecko.com/coins/images/3688/large/hbar.png?1696504364",
       "market_cap_rank": 24,
-      "upbit_krw": 154.0,
-      "bithumb_krw": 154.0,
-      "coinbase_usd": 0.105325
+      "upbit_krw": 153.0,
+      "bithumb_krw": 153.0,
+      "coinbase_usd": 0.10369
     },
     {
       "symbol": "LTC",
       "name": "Litecoin",
       "image": "https://coin-images.coingecko.com/coins/images/2/large/litecoin.png?1696501400",
       "market_cap_rank": 25,
-      "coinbase_usd": 56.42
+      "coinbase_usd": 56.11
     },
     {
       "symbol": "DAI",
       "name": "Dai",
       "image": "https://coin-images.coingecko.com/coins/images/9956/large/Badge_Dai.png?1696509996",
       "market_cap_rank": 26,
-      "coinbase_usd": 0.99995
+      "coinbase_usd": 0.9999
     },
     {
       "symbol": "AVAX",
@@ -186,92 +186,92 @@
       "market_cap_rank": 27,
       "upbit_krw": 14090.0,
       "bithumb_krw": 14080.0,
-      "coinbase_usd": 9.595
-    },
-    {
-      "symbol": "SHIB",
-      "name": "Shiba Inu",
-      "image": "https://coin-images.coingecko.com/coins/images/11939/large/shiba.png?1696511800",
-      "market_cap_rank": 28,
-      "upbit_krw": 0.0101,
-      "bithumb_krw": 0.0102,
-      "coinbase_usd": 7e-06
+      "coinbase_usd": 9.575
     },
     {
       "symbol": "PYUSD",
       "name": "PayPal USD",
       "image": "https://coin-images.coingecko.com/coins/images/31212/large/PYUSD_Token_Logo_2x.png?1765987788",
-      "market_cap_rank": 29,
+      "market_cap_rank": 28,
       "coinbase_usd": 1.0
+    },
+    {
+      "symbol": "SHIB",
+      "name": "Shiba Inu",
+      "image": "https://coin-images.coingecko.com/coins/images/11939/large/shiba.png?1696511800",
+      "market_cap_rank": 29,
+      "upbit_krw": 0.0101,
+      "bithumb_krw": 0.0101,
+      "coinbase_usd": 7e-06
     },
     {
       "symbol": "SUI",
       "name": "Sui",
       "image": "https://coin-images.coingecko.com/coins/images/26375/large/sui-ocean-square.png?1727791290",
       "market_cap_rank": 30,
-      "upbit_krw": 1524.0,
-      "bithumb_krw": 1526.0,
-      "coinbase_usd": 1.0382
+      "upbit_krw": 1515.0,
+      "bithumb_krw": 1516.0,
+      "coinbase_usd": 1.03105
     },
     {
       "symbol": "TON",
       "name": "Toncoin",
       "image": "https://coin-images.coingecko.com/coins/images/17980/large/photo_2024-09-10_17.09.00.jpeg?1725963446",
       "market_cap_rank": 31,
-      "bithumb_krw": 2218.0,
-      "coinbase_usd": 1.5125
+      "bithumb_krw": 2213.0,
+      "coinbase_usd": 1.5045
     },
     {
       "symbol": "CRO",
       "name": "Cronos",
       "image": "https://coin-images.coingecko.com/coins/images/7310/large/cro_token_logo.png?1696507599",
       "market_cap_rank": 33,
-      "upbit_krw": 121.0,
+      "upbit_krw": 122.0,
       "bithumb_krw": 122.0,
-      "coinbase_usd": 0.082725
+      "coinbase_usd": 0.08344
     },
     {
       "symbol": "WLFI",
       "name": "World Liberty Financial",
       "image": "https://coin-images.coingecko.com/coins/images/50767/large/wlfi.png?1756438915",
       "market_cap_rank": 34,
-      "upbit_krw": 162.0,
-      "bithumb_krw": 162.0,
-      "coinbase_usd": 0.11026
+      "upbit_krw": 158.0,
+      "bithumb_krw": 158.0,
+      "coinbase_usd": 0.10734
     },
     {
       "symbol": "XAUT",
       "name": "Tether Gold",
       "image": "https://coin-images.coingecko.com/coins/images/10481/large/Tether_Gold.png?1696510471",
       "market_cap_rank": 35,
-      "upbit_krw": 7347000.0,
+      "upbit_krw": 7338000.0,
       "bithumb_krw": 7341000.0
     },
     {
       "symbol": "DOT",
       "name": "Polkadot",
       "image": "https://coin-images.coingecko.com/coins/images/12171/large/polkadot.jpg?1766533446",
-      "market_cap_rank": 36,
-      "upbit_krw": 2097.0,
-      "bithumb_krw": 2098.0,
-      "coinbase_usd": 1.4275
+      "market_cap_rank": 37,
+      "upbit_krw": 2077.0,
+      "bithumb_krw": 2079.0,
+      "coinbase_usd": 1.413
     },
     {
       "symbol": "UNI",
       "name": "Uniswap",
       "image": "https://coin-images.coingecko.com/coins/images/12504/large/uniswap-logo.png?1720676669",
       "market_cap_rank": 38,
-      "upbit_krw": 5385.0,
-      "bithumb_krw": 5390.0,
-      "coinbase_usd": 3.669
+      "upbit_krw": 5400.0,
+      "bithumb_krw": 5395.0,
+      "coinbase_usd": 3.667
     },
     {
       "symbol": "PAXG",
       "name": "PAX Gold",
       "image": "https://coin-images.coingecko.com/coins/images/9519/large/paxgold.png?1696509604",
       "market_cap_rank": 39,
-      "bithumb_krw": 7379000.0,
-      "coinbase_usd": 5029.565
+      "bithumb_krw": 7377000.0,
+      "coinbase_usd": 5025.045
     },
     {
       "symbol": "MNT",
@@ -279,7 +279,7 @@
       "image": "https://coin-images.coingecko.com/coins/images/30980/large/MNT_Token_Logo.png?1765516974",
       "market_cap_rank": 40,
       "upbit_krw": 974.0,
-      "bithumb_krw": 977.0,
+      "bithumb_krw": 973.0,
       "coinbase_usd": 0.00028
     },
     {
@@ -287,7 +287,7 @@
       "name": "Pepe",
       "image": "https://coin-images.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1696528776",
       "market_cap_rank": 41,
-      "upbit_krw": 0.00697,
+      "upbit_krw": 0.00696,
       "bithumb_krw": 0.007,
       "coinbase_usd": 5e-06
     },
@@ -296,68 +296,68 @@
       "name": "Aave",
       "image": "https://coin-images.coingecko.com/coins/images/12645/large/aave-token-round.png?1720472354",
       "market_cap_rank": 42,
-      "upbit_krw": 190700.0,
-      "bithumb_krw": 191000.0,
-      "coinbase_usd": 129.925
+      "upbit_krw": 191100.0,
+      "bithumb_krw": 190900.0,
+      "coinbase_usd": 129.71
     },
     {
       "symbol": "TAO",
       "name": "Bittensor",
       "image": "https://coin-images.coingecko.com/coins/images/28452/large/ARUsPeNQ_400x400.jpeg?1696527447",
-      "market_cap_rank": 43,
-      "bithumb_krw": 284800.0,
-      "coinbase_usd": 194.29
+      "market_cap_rank": 44,
+      "bithumb_krw": 282800.0,
+      "coinbase_usd": 192.165
     },
     {
       "symbol": "ASTER",
       "name": "Aster",
       "image": "https://coin-images.coingecko.com/coins/images/69040/large/_ASTER.png?1757326782",
       "market_cap_rank": 45,
-      "bithumb_krw": 1079.0,
-      "coinbase_usd": 0.736
+      "bithumb_krw": 1063.0,
+      "coinbase_usd": 0.727
     },
     {
       "symbol": "SKY",
       "name": "Sky",
       "image": "https://coin-images.coingecko.com/coins/images/39925/large/sky.jpg?1724827980",
-      "market_cap_rank": 51,
-      "bithumb_krw": 100.0,
-      "coinbase_usd": 0.069075
+      "market_cap_rank": 49,
+      "bithumb_krw": 102.0,
+      "coinbase_usd": 0.069775
     },
     {
       "symbol": "ONDO",
       "name": "Ondo",
       "image": "https://coin-images.coingecko.com/coins/images/26580/large/ONDO.png?1696525656",
       "market_cap_rank": 55,
-      "upbit_krw": 433.0,
-      "bithumb_krw": 434.0,
-      "coinbase_usd": 0.29539
+      "upbit_krw": 431.0,
+      "bithumb_krw": 431.0,
+      "coinbase_usd": 0.29296
     },
     {
       "symbol": "ICP",
       "name": "Internet Computer",
       "image": "https://coin-images.coingecko.com/coins/images/14495/large/Internet_Computer_logo.png?1696514180",
       "market_cap_rank": 56,
-      "bithumb_krw": 3750.0,
-      "coinbase_usd": 2.568
+      "bithumb_krw": 3765.0,
+      "coinbase_usd": 2.5635
     },
     {
       "symbol": "NEAR",
       "name": "NEAR Protocol",
       "image": "https://coin-images.coingecko.com/coins/images/10365/large/near.jpg?1696510367",
       "market_cap_rank": 57,
-      "upbit_krw": 1605.0,
-      "bithumb_krw": 1605.0,
-      "coinbase_usd": 1.092
+      "upbit_krw": 1596.0,
+      "bithumb_krw": 1597.0,
+      "coinbase_usd": 1.084
     },
     {
       "symbol": "ETC",
       "name": "Ethereum Classic",
       "image": "https://coin-images.coingecko.com/coins/images/453/large/ethereum-classic-logo.png?1696501717",
       "market_cap_rank": 58,
-      "upbit_krw": 13230.0,
-      "bithumb_krw": 13240.0,
-      "coinbase_usd": 9.01
+      "upbit_krw": 13180.0,
+      "bithumb_krw": 13180.0,
+      "coinbase_usd": 8.975
     },
     {
       "symbol": "PUMP",
@@ -365,104 +365,104 @@
       "image": "https://coin-images.coingecko.com/coins/images/67164/large/pump.jpg?1751949376",
       "market_cap_rank": 59,
       "upbit_krw": 3.42,
-      "bithumb_krw": 3.413,
-      "coinbase_usd": 0.002328
+      "bithumb_krw": 3.423,
+      "coinbase_usd": 0.002331
     },
     {
       "symbol": "WLD",
       "name": "Worldcoin",
       "image": "https://coin-images.coingecko.com/coins/images/31069/large/worldcoin.jpeg?1696529903",
       "market_cap_rank": 61,
-      "upbit_krw": 638.0,
-      "bithumb_krw": 639.0,
-      "coinbase_usd": 0.43515
+      "upbit_krw": 636.0,
+      "bithumb_krw": 638.0,
+      "coinbase_usd": 0.43305
     },
     {
       "symbol": "POL",
       "name": "POL (ex-MATIC)",
       "image": "https://coin-images.coingecko.com/coins/images/32440/large/pol.png?1759114181",
       "market_cap_rank": 62,
-      "upbit_krw": 164.0,
-      "bithumb_krw": 164.0,
-      "coinbase_usd": 0.11115
+      "upbit_krw": 161.0,
+      "bithumb_krw": 161.0,
+      "coinbase_usd": 0.10955
     },
     {
       "symbol": "QNT",
       "name": "Quant",
       "image": "https://coin-images.coingecko.com/coins/images/3370/large/5ZOu7brX_400x400.jpg?1696504070",
       "market_cap_rank": 65,
-      "coinbase_usd": 75.165
+      "coinbase_usd": 75.0
     },
     {
       "symbol": "ATOM",
       "name": "Cosmos Hub",
       "image": "https://coin-images.coingecko.com/coins/images/1481/large/cosmos_hub.png?1696502525",
       "market_cap_rank": 66,
-      "upbit_krw": 3251.0,
-      "bithumb_krw": 3252.0,
-      "coinbase_usd": 2.215
+      "upbit_krw": 3233.0,
+      "bithumb_krw": 3225.0,
+      "coinbase_usd": 2.1935
     },
     {
       "symbol": "ENA",
       "name": "Ethena",
       "image": "https://coin-images.coingecko.com/coins/images/36530/large/ethena.png?1711701436",
       "market_cap_rank": 67,
-      "upbit_krw": 190.0,
-      "bithumb_krw": 191.0,
-      "coinbase_usd": 0.12955
+      "upbit_krw": 188.0,
+      "bithumb_krw": 188.0,
+      "coinbase_usd": 0.1279
     },
     {
       "symbol": "ALGO",
       "name": "Algorand",
       "image": "https://coin-images.coingecko.com/coins/images/4380/large/download.png?1696504978",
       "market_cap_rank": 72,
-      "upbit_krw": 149.0,
-      "bithumb_krw": 148.0,
-      "coinbase_usd": 0.1008
+      "upbit_krw": 146.0,
+      "bithumb_krw": 146.0,
+      "coinbase_usd": 0.09925
     },
     {
       "symbol": "FLR",
       "name": "Flare",
       "image": "https://coin-images.coingecko.com/coins/images/28624/large/FLR-icon200x200.png?1696527609",
       "market_cap_rank": 74,
-      "bithumb_krw": 14.55,
-      "coinbase_usd": 0.009905
+      "bithumb_krw": 14.59,
+      "coinbase_usd": 0.009945
     },
     {
       "symbol": "TRUMP",
       "name": "Official Trump",
       "image": "https://coin-images.coingecko.com/coins/images/53746/large/trump.png?1737171561",
       "market_cap_rank": 75,
-      "upbit_krw": 5315.0,
-      "bithumb_krw": 5315.0,
-      "coinbase_usd": 3.61
+      "upbit_krw": 5290.0,
+      "bithumb_krw": 5290.0,
+      "coinbase_usd": 3.605
     },
     {
       "symbol": "RENDER",
       "name": "Render",
       "image": "https://coin-images.coingecko.com/coins/images/11636/large/rndr.png?1696511529",
       "market_cap_rank": 77,
-      "upbit_krw": 2256.0,
-      "bithumb_krw": 2254.0,
-      "coinbase_usd": 1.539
+      "upbit_krw": 2243.0,
+      "bithumb_krw": 2241.0,
+      "coinbase_usd": 1.525
     },
     {
       "symbol": "APT",
       "name": "Aptos",
       "image": "https://coin-images.coingecko.com/coins/images/26455/large/Aptos-Network-Symbol-Black-RGB-1x.png?1761789140",
       "market_cap_rank": 78,
-      "upbit_krw": 1478.0,
-      "bithumb_krw": 1477.0,
-      "coinbase_usd": 1.00535
+      "upbit_krw": 1453.0,
+      "bithumb_krw": 1447.0,
+      "coinbase_usd": 0.98685
     },
     {
       "symbol": "FIL",
       "name": "Filecoin",
       "image": "https://coin-images.coingecko.com/coins/images/12817/large/filecoin.png?1696512609",
       "market_cap_rank": 79,
-      "upbit_krw": 1511.0,
-      "bithumb_krw": 1505.0,
-      "coinbase_usd": 1.029
+      "upbit_krw": 1499.0,
+      "bithumb_krw": 1498.0,
+      "coinbase_usd": 1.0205
     },
     {
       "symbol": "MORPHO",
@@ -470,32 +470,32 @@
       "image": "https://coin-images.coingecko.com/coins/images/29837/large/Morpho-token-icon.png?1726771230",
       "market_cap_rank": 81,
       "bithumb_krw": 2035.0,
-      "coinbase_usd": 1.38355
+      "coinbase_usd": 1.3843
     },
     {
       "symbol": "VET",
       "name": "VeChain",
       "image": "https://coin-images.coingecko.com/coins/images/1167/large/VET.png?1742383283",
       "market_cap_rank": 82,
-      "upbit_krw": 12.9,
-      "bithumb_krw": 12.87,
-      "coinbase_usd": 0.00877
+      "upbit_krw": 12.8,
+      "bithumb_krw": 12.8,
+      "coinbase_usd": 0.00871
     },
     {
       "symbol": "ARB",
       "name": "Arbitrum",
       "image": "https://coin-images.coingecko.com/coins/images/16547/large/arb.jpg?1721358242",
       "market_cap_rank": 87,
-      "upbit_krw": 179.0,
-      "bithumb_krw": 179.0,
-      "coinbase_usd": 0.12175
+      "upbit_krw": 177.0,
+      "bithumb_krw": 177.0,
+      "coinbase_usd": 0.1206
     },
     {
       "symbol": "BONK",
       "name": "Bonk",
       "image": "https://coin-images.coingecko.com/coins/images/28600/large/bonk.jpg?1696527587",
       "market_cap_rank": 90,
-      "upbit_krw": 0.0106,
+      "upbit_krw": 0.0105,
       "bithumb_krw": 0.0105,
       "coinbase_usd": 7e-06
     },
@@ -504,8 +504,8 @@
       "name": "Jupiter",
       "image": "https://coin-images.coingecko.com/coins/images/34188/large/jup.png?1704266489",
       "market_cap_rank": 95,
-      "upbit_krw": 243.0,
-      "bithumb_krw": 243.0,
+      "upbit_krw": 241.0,
+      "bithumb_krw": 241.0,
       "coinbase_usd": 0.000462
     },
     {
@@ -513,98 +513,98 @@
       "name": "Sei",
       "image": "https://coin-images.coingecko.com/coins/images/28205/large/Sei_Logo_-_Transparent.png?1696527207",
       "market_cap_rank": 97,
-      "upbit_krw": 116.0,
-      "bithumb_krw": 115.0,
-      "coinbase_usd": 0.078555
+      "upbit_krw": 115.0,
+      "bithumb_krw": 116.0,
+      "coinbase_usd": 0.077975
     },
     {
       "symbol": "DASH",
       "name": "Dash",
       "image": "https://coin-images.coingecko.com/coins/images/19/large/dash-logo.png?1696501423",
       "market_cap_rank": 99,
-      "coinbase_usd": 40.415
+      "coinbase_usd": 40.04
     },
     {
       "symbol": "STX",
       "name": "Stacks",
       "image": "https://coin-images.coingecko.com/coins/images/2069/large/Stacks_Logo_png.png?1709979332",
       "market_cap_rank": 100,
-      "upbit_krw": 412.0,
-      "bithumb_krw": 411.0,
-      "coinbase_usd": 0.28015
+      "upbit_krw": 409.0,
+      "bithumb_krw": 409.0,
+      "coinbase_usd": 0.27785
     },
     {
       "symbol": "PENGU",
       "name": "Pudgy Penguins",
       "image": "https://coin-images.coingecko.com/coins/images/52622/large/PUDGY_PENGUINS_PENGU_PFP.png?1733809110",
-      "market_cap_rank": 101,
+      "market_cap_rank": 102,
       "upbit_krw": 11.5,
-      "bithumb_krw": 11.55,
-      "coinbase_usd": 0.007872
+      "bithumb_krw": 11.5,
+      "coinbase_usd": 0.007822
     },
     {
       "symbol": "EURC",
       "name": "EURC",
       "image": "https://coin-images.coingecko.com/coins/images/26045/large/EURC.png?1769615705",
       "market_cap_rank": 104,
-      "coinbase_usd": 1.185031
+      "coinbase_usd": 1.184434
     },
     {
       "symbol": "XTZ",
       "name": "Tezos",
       "image": "https://coin-images.coingecko.com/coins/images/976/large/Tezos-logo.png?1696502091",
-      "market_cap_rank": 105,
-      "upbit_krw": 622.0,
-      "bithumb_krw": 623.0,
-      "coinbase_usd": 0.42545
+      "market_cap_rank": 106,
+      "upbit_krw": 621.0,
+      "bithumb_krw": 621.0,
+      "coinbase_usd": 0.4225
     },
     {
       "symbol": "VIRTUAL",
       "name": "Virtuals Protocol",
       "image": "https://coin-images.coingecko.com/coins/images/34057/large/LOGOMARK.png?1708356054",
-      "market_cap_rank": 106,
-      "upbit_krw": 1011.0,
-      "bithumb_krw": 1010.0
+      "market_cap_rank": 107,
+      "upbit_krw": 1005.0,
+      "bithumb_krw": 1006.0
     },
     {
       "symbol": "CHZ",
       "name": "Chiliz",
       "image": "https://coin-images.coingecko.com/coins/images/8834/large/CHZ_Token_updated.png?1696508986",
-      "market_cap_rank": 107,
-      "upbit_krw": 64.6,
-      "bithumb_krw": 64.41,
-      "coinbase_usd": 0.0437
+      "market_cap_rank": 108,
+      "upbit_krw": 64.4,
+      "bithumb_krw": 64.32,
+      "coinbase_usd": 0.0436
     },
     {
       "symbol": "CAKE",
       "name": "PancakeSwap",
       "image": "https://coin-images.coingecko.com/coins/images/12632/large/pancakeswap-cake-logo_%281%29.png?1696512440",
-      "market_cap_rank": 108,
-      "bithumb_krw": 1993.0,
-      "coinbase_usd": 1.357
+      "market_cap_rank": 109,
+      "bithumb_krw": 1995.0,
+      "coinbase_usd": 1.348
     },
     {
       "symbol": "STABLE",
       "name": "​​Stable",
       "image": "https://coin-images.coingecko.com/coins/images/69242/large/stable-logotype-framed-square-light.png?1762753913",
       "market_cap_rank": 110,
-      "bithumb_krw": 34.67
-    },
-    {
-      "symbol": "OP",
-      "name": "Optimism",
-      "image": "https://coin-images.coingecko.com/coins/images/25244/large/Optimism.png?1696524385",
-      "market_cap_rank": 111,
-      "upbit_krw": 293.0,
-      "bithumb_krw": 293.0,
-      "coinbase_usd": 0.1995
+      "bithumb_krw": 34.45
     },
     {
       "symbol": "LIT",
       "name": "Lighter",
       "image": "https://coin-images.coingecko.com/coins/images/71121/large/lighter.png?1765888098",
+      "market_cap_rank": 111,
+      "coinbase_usd": 0.192482
+    },
+    {
+      "symbol": "OP",
+      "name": "Optimism",
+      "image": "https://coin-images.coingecko.com/coins/images/25244/large/Optimism.png?1696524385",
       "market_cap_rank": 112,
-      "coinbase_usd": 0.210898
+      "upbit_krw": 290.0,
+      "bithumb_krw": 291.0,
+      "coinbase_usd": 0.1975
     },
     {
       "symbol": "FET",
@@ -612,16 +612,16 @@
       "image": "https://coin-images.coingecko.com/coins/images/5681/large/ASI.png?1719827289",
       "market_cap_rank": 114,
       "bithumb_krw": 267.0,
-      "coinbase_usd": 0.18195
+      "coinbase_usd": 0.1813
     },
     {
       "symbol": "IP",
       "name": "Story",
       "image": "https://coin-images.coingecko.com/coins/images/54035/large/Transparent_bg.png?1738075331",
       "market_cap_rank": 115,
-      "upbit_krw": 1734.0,
-      "bithumb_krw": 1732.0,
-      "coinbase_usd": 1.178
+      "upbit_krw": 1730.0,
+      "bithumb_krw": 1729.0,
+      "coinbase_usd": 1.175
     },
     {
       "symbol": "CRV",
@@ -629,56 +629,57 @@
       "image": "https://coin-images.coingecko.com/coins/images/12124/large/Curve.png?1696511967",
       "market_cap_rank": 117,
       "bithumb_krw": 391.0,
-      "coinbase_usd": 0.26765
+      "coinbase_usd": 0.2658
     },
     {
       "symbol": "ZRO",
       "name": "LayerZero",
       "image": "https://coin-images.coingecko.com/coins/images/28206/large/ftxG9_TJ_400x400.jpeg?1696527208",
-      "market_cap_rank": 119,
-      "upbit_krw": 2808.0,
-      "bithumb_krw": 2805.0,
-      "coinbase_usd": 1.911
-    },
-    {
-      "symbol": "JST",
-      "name": "JUST",
-      "image": "https://coin-images.coingecko.com/coins/images/11095/large/JUST.jpg?1696511035",
-      "market_cap_rank": 121,
-      "upbit_krw": 61.4,
-      "bithumb_krw": 61.35
+      "market_cap_rank": 118,
+      "upbit_krw": 2799.0,
+      "bithumb_krw": 2800.0,
+      "coinbase_usd": 1.903
     },
     {
       "symbol": "H",
       "name": "Humanity",
       "image": "https://coin-images.coingecko.com/coins/images/66811/large/H_tokenLogo_original.png?1750581252",
+      "market_cap_rank": 121,
+      "bithumb_krw": 298.0
+    },
+    {
+      "symbol": "JST",
+      "name": "JUST",
+      "image": "https://coin-images.coingecko.com/coins/images/11095/large/JUST.jpg?1696511035",
       "market_cap_rank": 122,
-      "bithumb_krw": 294.0
+      "upbit_krw": 61.0,
+      "bithumb_krw": 61.16
     },
     {
       "symbol": "BSV",
       "name": "Bitcoin SV",
       "image": "https://coin-images.coingecko.com/coins/images/6799/large/BSV.png?1696507128",
       "market_cap_rank": 123,
-      "upbit_krw": 25750.0,
-      "bithumb_krw": 25690.0,
-      "coinbase_usd": 17.526327
+      "upbit_krw": 25900.0,
+      "bithumb_krw": 25900.0,
+      "coinbase_usd": 17.703318
+    },
+    {
+      "symbol": "KITE",
+      "name": "Kite",
+      "image": "https://coin-images.coingecko.com/coins/images/70426/large/KITE-ICON.png?1762328605",
+      "market_cap_rank": 124,
+      "upbit_krw": 289.0,
+      "bithumb_krw": 289.0,
+      "coinbase_usd": 0.19661
     },
     {
       "symbol": "GNO",
       "name": "Gnosis",
       "image": "https://coin-images.coingecko.com/coins/images/662/large/logo_square_simple_300px.png?1696501854",
-      "market_cap_rank": 124,
-      "bithumb_krw": 195500.0,
-      "coinbase_usd": 132.97
-    },
-    {
-      "symbol": "ETHFI",
-      "name": "Ether.fi",
-      "image": "https://coin-images.coingecko.com/coins/images/35958/large/etherfi.jpeg?1710254562",
       "market_cap_rank": 125,
-      "bithumb_krw": 740.0,
-      "coinbase_usd": 0.5045
+      "bithumb_krw": 195500.0,
+      "coinbase_usd": 133.66
     },
     {
       "symbol": "BTT",
@@ -686,39 +687,38 @@
       "image": "https://coin-images.coingecko.com/coins/images/22457/large/btt_logo.png?1696521780",
       "market_cap_rank": 126,
       "upbit_krw": 0.00052,
-      "bithumb_krw": 0.0005
+      "bithumb_krw": 0.0006
     },
     {
-      "symbol": "PYTH",
-      "name": "Pyth Network",
-      "image": "https://coin-images.coingecko.com/coins/images/31924/large/pyth.png?1701245725",
+      "symbol": "ETHFI",
+      "name": "Ether.fi",
+      "image": "https://coin-images.coingecko.com/coins/images/35958/large/etherfi.jpeg?1710254562",
       "market_cap_rank": 127,
-      "upbit_krw": 88.3,
-      "bithumb_krw": 88.57,
-      "coinbase_usd": 0.0603
+      "bithumb_krw": 736.0,
+      "coinbase_usd": 0.5005
     },
     {
       "symbol": "KAIA",
       "name": "Kaia",
       "image": "https://coin-images.coingecko.com/coins/images/39901/large/KAIA.png?1724734368",
       "market_cap_rank": 128,
-      "bithumb_krw": 87.28
+      "bithumb_krw": 87.5
     },
     {
-      "symbol": "KITE",
-      "name": "Kite",
-      "image": "https://coin-images.coingecko.com/coins/images/70426/large/KITE-ICON.png?1762328605",
+      "symbol": "PYTH",
+      "name": "Pyth Network",
+      "image": "https://coin-images.coingecko.com/coins/images/31924/large/pyth.png?1701245725",
       "market_cap_rank": 129,
-      "upbit_krw": 284.0,
-      "bithumb_krw": 284.0,
-      "coinbase_usd": 0.19301
+      "upbit_krw": 87.2,
+      "bithumb_krw": 87.05,
+      "coinbase_usd": 0.0592
     },
     {
       "symbol": "SUN",
       "name": "Sun Token",
       "image": "https://coin-images.coingecko.com/coins/images/12424/large/RSFOmQ.png?1696512245",
       "market_cap_rank": 130,
-      "upbit_krw": 25.9,
+      "upbit_krw": 25.7,
       "bithumb_krw": 25.8
     },
     {
@@ -729,134 +729,134 @@
       "bithumb_krw": 0.0005
     },
     {
-      "symbol": "FLOKI",
-      "name": "FLOKI",
-      "image": "https://coin-images.coingecko.com/coins/images/16746/large/PNG_image.png?1696516318",
-      "market_cap_rank": 132,
-      "bithumb_krw": 0.0511,
-      "coinbase_usd": 3.5e-05
-    },
-    {
       "symbol": "SPX",
       "name": "SPX6900",
       "image": "https://coin-images.coingecko.com/coins/images/31401/large/centeredcoin_%281%29.png?1737048493",
+      "market_cap_rank": 132,
+      "coinbase_usd": 0.3547
+    },
+    {
+      "symbol": "FLOKI",
+      "name": "FLOKI",
+      "image": "https://coin-images.coingecko.com/coins/images/16746/large/PNG_image.png?1696516318",
       "market_cap_rank": 133,
-      "coinbase_usd": 0.35735
+      "bithumb_krw": 0.0503,
+      "coinbase_usd": 3.4e-05
     },
     {
       "symbol": "INJ",
       "name": "Injective",
       "image": "https://coin-images.coingecko.com/coins/images/12882/large/Other_200x200.png?1738782212",
       "market_cap_rank": 134,
-      "upbit_krw": 4864.0,
-      "bithumb_krw": 4870.0,
-      "coinbase_usd": 3.3185
+      "upbit_krw": 4845.0,
+      "bithumb_krw": 4837.0,
+      "coinbase_usd": 3.2905
     },
     {
       "symbol": "SYRUP",
       "name": "Maple Finance",
       "image": "https://coin-images.coingecko.com/coins/images/51232/large/_syrup_token_logo.png?1747292046",
       "market_cap_rank": 135,
-      "upbit_krw": 420.0,
-      "bithumb_krw": 420.0,
-      "coinbase_usd": 0.2855
+      "upbit_krw": 417.0,
+      "bithumb_krw": 416.0,
+      "coinbase_usd": 0.2843
     },
     {
       "symbol": "TIA",
       "name": "Celestia",
       "image": "https://coin-images.coingecko.com/coins/images/31967/large/tia.jpg?1696530772",
       "market_cap_rank": 136,
-      "upbit_krw": 535.0,
-      "bithumb_krw": 531.0,
-      "coinbase_usd": 0.36355
-    },
-    {
-      "symbol": "IOTA",
-      "name": "IOTA",
-      "image": "https://coin-images.coingecko.com/coins/images/692/large/IOTA_Thumbnail_%281%29.png?1743772896",
-      "market_cap_rank": 138,
-      "upbit_krw": 108.0,
-      "bithumb_krw": 107.0
+      "upbit_krw": 528.0,
+      "bithumb_krw": 528.0,
+      "coinbase_usd": 0.3588
     },
     {
       "symbol": "GRT",
       "name": "The Graph",
       "image": "https://coin-images.coingecko.com/coins/images/13397/large/Graph_Token.png?1696513159",
+      "market_cap_rank": 138,
+      "upbit_krw": 42.8,
+      "bithumb_krw": 42.91,
+      "coinbase_usd": 0.02915
+    },
+    {
+      "symbol": "IOTA",
+      "name": "IOTA",
+      "image": "https://coin-images.coingecko.com/coins/images/692/large/IOTA_Thumbnail_%281%29.png?1743772896",
       "market_cap_rank": 139,
-      "upbit_krw": 43.2,
-      "bithumb_krw": 42.94,
-      "coinbase_usd": 0.02935
+      "upbit_krw": 106.0,
+      "bithumb_krw": 106.0
     },
     {
       "symbol": "JASMY",
       "name": "JasmyCoin",
       "image": "https://coin-images.coingecko.com/coins/images/13876/large/JASMY200x200.jpg?1696513620",
       "market_cap_rank": 140,
-      "bithumb_krw": 9.278,
-      "coinbase_usd": 0.0063
+      "bithumb_krw": 9.173,
+      "coinbase_usd": 0.006245
     },
     {
       "symbol": "LDO",
       "name": "Lido DAO",
       "image": "https://coin-images.coingecko.com/coins/images/13573/large/Lido_DAO.png?1696513326",
       "market_cap_rank": 141,
-      "bithumb_krw": 533.0,
-      "coinbase_usd": 0.363
+      "bithumb_krw": 531.0,
+      "coinbase_usd": 0.3615
     },
     {
       "symbol": "AERO",
       "name": "Aerodrome Finance",
       "image": "https://coin-images.coingecko.com/coins/images/31745/large/token.png?1696530564",
       "market_cap_rank": 142,
-      "upbit_krw": 488.0,
-      "bithumb_krw": 487.0,
-      "coinbase_usd": 0.331825
-    },
-    {
-      "symbol": "CFX",
-      "name": "Conflux",
-      "image": "https://coin-images.coingecko.com/coins/images/13079/large/3vuYMbjN.png?1696512867",
-      "market_cap_rank": 143,
-      "bithumb_krw": 84.5
+      "upbit_krw": 486.0,
+      "bithumb_krw": 485.0,
+      "coinbase_usd": 0.33013
     },
     {
       "symbol": "PRIME",
       "name": "PRIME",
       "image": "https://coin-images.coingecko.com/coins/images/71002/large/Frame_427319702.png?1765093510",
+      "market_cap_rank": 143,
+      "coinbase_usd": 0.501
+    },
+    {
+      "symbol": "CFX",
+      "name": "Conflux",
+      "image": "https://coin-images.coingecko.com/coins/images/13079/large/3vuYMbjN.png?1696512867",
       "market_cap_rank": 144,
-      "coinbase_usd": 0.4985
+      "bithumb_krw": 83.84
     },
     {
       "symbol": "2Z",
       "name": "DoubleZero",
       "image": "https://coin-images.coingecko.com/coins/images/68339/large/Coingecko_-_PFP.png?1755694420",
-      "market_cap_rank": 148,
+      "market_cap_rank": 147,
       "upbit_krw": 120.0,
       "bithumb_krw": 120.0,
-      "coinbase_usd": 0.081845
+      "coinbase_usd": 0.081985
     },
     {
       "symbol": "STRK",
       "name": "Starknet",
       "image": "https://coin-images.coingecko.com/coins/images/26433/large/starknet.png?1696525507",
       "market_cap_rank": 151,
-      "bithumb_krw": 76.83,
-      "coinbase_usd": 0.0525
+      "bithumb_krw": 76.54,
+      "coinbase_usd": 0.052
     },
     {
       "symbol": "FRAX",
       "name": "Legacy Frax Dollar",
       "image": "https://coin-images.coingecko.com/coins/images/13422/large/LFRAX.png?1751911193",
       "market_cap_rank": 152,
-      "bithumb_krw": 954.0
+      "bithumb_krw": 958.0
     },
     {
       "symbol": "ENS",
       "name": "Ethereum Name Service",
       "image": "https://coin-images.coingecko.com/coins/images/19785/large/ENS.jpg?1727872989",
       "market_cap_rank": 154,
-      "upbit_krw": 10150.0,
-      "bithumb_krw": 10120.0,
+      "upbit_krw": 10120.0,
+      "bithumb_krw": 10140.0,
       "coinbase_usd": 6.895
     },
     {
@@ -864,159 +864,159 @@
       "name": "Monad",
       "image": "https://coin-images.coingecko.com/coins/images/38927/large/mon.png?1766029057",
       "market_cap_rank": 155,
-      "upbit_krw": 35.7,
-      "bithumb_krw": 35.4,
-      "coinbase_usd": 0.02423
+      "upbit_krw": 35.3,
+      "bithumb_krw": 35.02,
+      "coinbase_usd": 0.024
     },
     {
       "symbol": "AXS",
       "name": "Axie Infinity",
       "image": "https://coin-images.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1696512817",
       "market_cap_rank": 156,
-      "upbit_krw": 2207.0,
-      "bithumb_krw": 2205.0,
-      "coinbase_usd": 1.502
+      "upbit_krw": 2187.0,
+      "bithumb_krw": 2188.0,
+      "coinbase_usd": 1.489
     },
     {
       "symbol": "WIF",
       "name": "dogwifhat",
       "image": "https://coin-images.coingecko.com/coins/images/33566/large/dogwifhat.jpg?1702499428",
-      "market_cap_rank": 158,
-      "bithumb_krw": 371.0,
-      "coinbase_usd": 0.253
+      "market_cap_rank": 157,
+      "bithumb_krw": 368.0,
+      "coinbase_usd": 0.2515
     },
     {
       "symbol": "ZK",
       "name": "ZKsync",
       "image": "https://coin-images.coingecko.com/coins/images/38043/large/ZKTokenBlack.png?1718614502",
       "market_cap_rank": 159,
-      "upbit_krw": 34.1,
-      "bithumb_krw": 34.13,
-      "coinbase_usd": 0.02325
+      "upbit_krw": 34.2,
+      "bithumb_krw": 34.11,
+      "coinbase_usd": 0.023215
     },
     {
       "symbol": "SAND",
       "name": "The Sandbox",
       "image": "https://coin-images.coingecko.com/coins/images/12129/large/sandbox_logo.jpg?1696511971",
       "market_cap_rank": 160,
-      "upbit_krw": 136.0,
-      "bithumb_krw": 137.0,
-      "coinbase_usd": 0.0931
-    },
-    {
-      "symbol": "THETA",
-      "name": "Theta Network",
-      "image": "https://coin-images.coingecko.com/coins/images/2538/large/theta-token-logo.png?1696503349",
-      "market_cap_rank": 163,
-      "upbit_krw": 329.0,
-      "bithumb_krw": 329.0,
-      "coinbase_usd": 0.223959
+      "upbit_krw": 135.0,
+      "bithumb_krw": 136.0,
+      "coinbase_usd": 0.09215
     },
     {
       "symbol": "XPL",
       "name": "Plasma",
       "image": "https://coin-images.coingecko.com/coins/images/66489/large/Plasma-symbol-green-1.png?1755142558",
+      "market_cap_rank": 164,
+      "upbit_krw": 152.0,
+      "bithumb_krw": 152.0,
+      "coinbase_usd": 0.103
+    },
+    {
+      "symbol": "THETA",
+      "name": "Theta Network",
+      "image": "https://coin-images.coingecko.com/coins/images/2538/large/theta-token-logo.png?1696503349",
       "market_cap_rank": 165,
-      "upbit_krw": 151.0,
-      "bithumb_krw": 151.0,
-      "coinbase_usd": 0.1027
+      "upbit_krw": 326.0,
+      "bithumb_krw": 329.0,
+      "coinbase_usd": 0.222265
     },
     {
       "symbol": "PENDLE",
       "name": "Pendle",
       "image": "https://coin-images.coingecko.com/coins/images/15069/large/Pendle_Logo_Normal-03.png?1696514728",
-      "market_cap_rank": 171,
-      "upbit_krw": 1932.0,
-      "bithumb_krw": 1930.0,
-      "coinbase_usd": 1.314
+      "market_cap_rank": 170,
+      "upbit_krw": 1919.0,
+      "bithumb_krw": 1916.0,
+      "coinbase_usd": 1.306
     },
     {
       "symbol": "FARTCOIN",
       "name": "Fartcoin",
       "image": "https://coin-images.coingecko.com/coins/images/50891/large/fart.jpg?1729503972",
       "market_cap_rank": 172,
-      "coinbase_usd": 0.21605
-    },
-    {
-      "symbol": "HNT",
-      "name": "Helium",
-      "image": "https://coin-images.coingecko.com/coins/images/4284/large/helium_logo_use.png?1748092589",
-      "market_cap_rank": 173,
-      "coinbase_usd": 1.138
+      "coinbase_usd": 0.21465
     },
     {
       "symbol": "MANA",
       "name": "Decentraland",
       "image": "https://coin-images.coingecko.com/coins/images/878/large/decentraland-mana.png?1696502010",
+      "market_cap_rank": 173,
+      "upbit_krw": 158.0,
+      "bithumb_krw": 159.0,
+      "coinbase_usd": 0.108
+    },
+    {
+      "symbol": "HNT",
+      "name": "Helium",
+      "image": "https://coin-images.coingecko.com/coins/images/4284/large/helium_logo_use.png?1748092589",
       "market_cap_rank": 174,
-      "upbit_krw": 160.0,
-      "bithumb_krw": 160.0,
-      "coinbase_usd": 0.1087
+      "coinbase_usd": 1.12
     },
     {
       "symbol": "NEO",
       "name": "NEO",
       "image": "https://coin-images.coingecko.com/coins/images/480/large/NEO_512_512.png?1696501735",
       "market_cap_rank": 175,
-      "upbit_krw": 4333.0,
-      "bithumb_krw": 4324.0
+      "upbit_krw": 4308.0,
+      "bithumb_krw": 4306.0
     },
     {
       "symbol": "BAT",
       "name": "Basic Attention",
       "image": "https://coin-images.coingecko.com/coins/images/677/large/basic-attention-token.png?1696501867",
       "market_cap_rank": 177,
-      "upbit_krw": 202.0,
-      "bithumb_krw": 202.0,
-      "coinbase_usd": 0.1376
+      "upbit_krw": 201.0,
+      "bithumb_krw": 201.0,
+      "coinbase_usd": 0.13633
     },
     {
       "symbol": "GALA",
       "name": "GALA",
       "image": "https://coin-images.coingecko.com/coins/images/12493/large/GALA_token_image_-_200PNG.png?1709725869",
       "market_cap_rank": 178,
-      "bithumb_krw": 6.372,
-      "coinbase_usd": 0.004332
+      "bithumb_krw": 6.318,
+      "coinbase_usd": 0.004292
     },
     {
       "symbol": "XCN",
       "name": "Onyxcoin",
       "image": "https://coin-images.coingecko.com/coins/images/24210/large/onyxlogo.jpg?1696523397",
-      "market_cap_rank": 179,
-      "bithumb_krw": 8.092,
-      "coinbase_usd": 0.00548
+      "market_cap_rank": 180,
+      "bithumb_krw": 8.108,
+      "coinbase_usd": 0.00553
     },
     {
       "symbol": "GLM",
       "name": "Golem",
       "image": "https://coin-images.coingecko.com/coins/images/542/large/Golem_Submark_Positive_RGB.png?1696501761",
-      "market_cap_rank": 182,
-      "upbit_krw": 293.0,
-      "bithumb_krw": 292.0,
-      "coinbase_usd": 0.1989
+      "market_cap_rank": 183,
+      "upbit_krw": 292.0,
+      "bithumb_krw": 291.0,
+      "coinbase_usd": 0.19835
     },
     {
       "symbol": "COMP",
       "name": "Compound",
       "image": "https://coin-images.coingecko.com/coins/images/10775/large/COMP.png?1696510737",
       "market_cap_rank": 184,
-      "upbit_krw": 29950.0,
-      "bithumb_krw": 29920.0,
-      "coinbase_usd": 20.44
+      "upbit_krw": 30030.0,
+      "bithumb_krw": 29740.0,
+      "coinbase_usd": 20.41
     },
     {
       "symbol": "S",
       "name": "Sonic",
       "image": "https://coin-images.coingecko.com/coins/images/38108/large/200x200_Sonic_Logo.png?1734679256",
       "market_cap_rank": 186,
-      "bithumb_krw": 75.07,
-      "coinbase_usd": 0.051275
+      "bithumb_krw": 75.93,
+      "coinbase_usd": 0.05175
     },
     {
       "symbol": "FF",
       "name": "Falcon Finance",
       "image": "https://coin-images.coingecko.com/coins/images/69121/large/ff.png?1757573403",
-      "market_cap_rank": 188,
+      "market_cap_rank": 187,
       "upbit_krw": 120.0,
       "bithumb_krw": 120.0
     },
@@ -1024,43 +1024,43 @@
       "symbol": "FLUID",
       "name": "Fluid",
       "image": "https://coin-images.coingecko.com/coins/images/14688/large/Logo_1_%28brighter%29.png?1734430693",
-      "market_cap_rank": 192,
-      "upbit_krw": 3549.0,
-      "bithumb_krw": 3538.0,
-      "coinbase_usd": 2.431
+      "market_cap_rank": 193,
+      "upbit_krw": 3547.0,
+      "bithumb_krw": 3546.0,
+      "coinbase_usd": 2.417
     },
     {
       "symbol": "CVX",
       "name": "Convex Finance",
       "image": "https://coin-images.coingecko.com/coins/images/15585/large/convex.png?1696515221",
       "market_cap_rank": 194,
-      "coinbase_usd": 2.0215
+      "coinbase_usd": 2.0135
     },
     {
       "symbol": "BARD",
       "name": "Lombard",
       "image": "https://coin-images.coingecko.com/coins/images/68404/large/bard.png?1755657543",
       "market_cap_rank": 195,
-      "upbit_krw": 1200.0,
-      "bithumb_krw": 1200.0,
-      "coinbase_usd": 0.817
-    },
-    {
-      "symbol": "AWE",
-      "name": "AWE Network",
-      "image": "https://coin-images.coingecko.com/coins/images/8713/large/awe-network.jpg?1747816016",
-      "market_cap_rank": 197,
-      "upbit_krw": 134.0,
-      "bithumb_krw": 134.0
+      "upbit_krw": 1196.0,
+      "bithumb_krw": 1197.0,
+      "coinbase_usd": 0.8183
     },
     {
       "symbol": "RAY",
       "name": "Raydium",
       "image": "https://coin-images.coingecko.com/coins/images/13928/large/PSigc4ie_400x400.jpg?1696513668",
+      "market_cap_rank": 197,
+      "upbit_krw": 964.0,
+      "bithumb_krw": 963.0,
+      "coinbase_usd": 0.6597
+    },
+    {
+      "symbol": "AWE",
+      "name": "AWE Network",
+      "image": "https://coin-images.coingecko.com/coins/images/8713/large/awe-network.jpg?1747816016",
       "market_cap_rank": 198,
-      "upbit_krw": 969.0,
-      "bithumb_krw": 969.0,
-      "coinbase_usd": 0.65795
+      "upbit_krw": 132.0,
+      "bithumb_krw": 134.0
     },
     {
       "symbol": "XEC",
