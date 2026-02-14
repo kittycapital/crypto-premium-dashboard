@@ -187,7 +187,7 @@ a{color:var(--hv-primary-light);text-decoration:none}
 
 <script>
 /* ===== SHARE ===== */
-var SHARE_URL='https://herdvibe.com/44';
+var SHARE_URL='https://herdvibe.com/61';
 function ensureKakao(){try{if(typeof Kakao!=='undefined'&&!Kakao.isInitialized())Kakao.init('a43ed7b39fac35458f4f9df925a279b5');return typeof Kakao!=='undefined'&&Kakao.isInitialized();}catch(e){return false;}}
 ensureKakao();
 function copyToClipboard(t){try{window.parent.postMessage({type:'clipboard',text:t},'*');}catch(e){}try{navigator.clipboard.writeText(t);}catch(e){}}
@@ -256,12 +256,11 @@ async function refresh(){await fetchBinance();calculate();renderBanner();refresh
 async function init(){await loadServerData();await refresh();setInterval(function(){refreshTimer--;document.getElementById('countdown').textContent=refreshTimer+'s';if(refreshTimer<=0)refresh();},1000);setInterval(loadServerData,300000);}
 
 /* IFRAME RESIZE */
-var _lastH=0,_ht;
-function sendHeight(){clearTimeout(_ht);_ht=setTimeout(function(){var el=document.querySelector('.hv-page');var header=document.querySelector('.hv-header');var h=(el?el.offsetTop+el.offsetHeight:document.body.scrollHeight);if(Math.abs(h-_lastH)>5){_lastH=h;window.parent.postMessage({type:'resize',height:h},'*');window.parent.postMessage({height:h},'*');window.parent.postMessage(JSON.stringify({event:'setHeight',height:h}),'*');}},150);}
+var _lastH=0,_ht,_frameId='hvPremiumIndex';
+function sendHeight(){clearTimeout(_ht);_ht=setTimeout(function(){var el=document.querySelector('.hv-page');var h=(el?el.offsetTop+el.offsetHeight+20:document.body.scrollHeight);if(Math.abs(h-_lastH)>5){_lastH=h;window.parent.postMessage({type:'resize',height:h,id:_frameId},'*');window.parent.postMessage({height:h,id:_frameId},'*');}},150);}
 window.addEventListener('resize',sendHeight);
 window.addEventListener('load',function(){sendHeight();setTimeout(sendHeight,500);setTimeout(sendHeight,1500);setTimeout(sendHeight,3000);});
 new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true});
-window.addEventListener('message',function(e){if(e.data&&e.data.type==='requestResize'){_lastH=0;sendHeight();}});
 setInterval(sendHeight,2000);
 
 init();
