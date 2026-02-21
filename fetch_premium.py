@@ -243,12 +243,60 @@ def main():
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False)
 
+    # 7) 히스토리 스냅샷 저장 (premium-all.html 추이 차트용)
+    history_dir = DATA_DIR / "history"
+    history_dir.mkdir(exist_ok=True)
+    now_utc = datetime.now(timezone.utc)
+    today_file = history_dir / f"{now_utc.strftime('%Y-%m-%d')}.json"
+
+    # 기존 파일 있으면 로드, 없으면 빈 배열
+    history_entries = []
+    if today_file.exists():
+        try:
+            with open(today_file, "r", encoding="utf-8") as f:
+                history_entries = json.load(f)
+        except (json.JSONDecodeError, Exception):
+            history_entries = []
+
+    # 스냅샷 생성: {timestamp, usd_krw, coins: {SYM: {up_krw, bt_krw, cb_usd}}}
+    snap_coins = {}
+    for sym, c in coins.items():
+        entry = {}
+        if "upbit_krw" in c:
+            entry["up_krw"] = c["upbit_krw"]
+        if "bithumb_krw" in c:
+            entry["bt_krw"] = c["bithumb_krw"]
+        if "coinbase_usd" in c:
+            entry["cb_usd"] = c["coinbase_usd"]
+        if entry:
+            snap_coins[sym] = entry
+
+    snapshot = {
+        "timestamp": now_utc.isoformat(),
+        "usd_krw": round(usd_krw, 2),
+        "coins": snap_coins,
+    }
+    history_entries.append(snapshot)
+
+    with open(today_file, "w", encoding="utf-8") as f:
+        json.dump(history_entries, f, ensure_ascii=False)
+
+    # 30일 이전 히스토리 파일 자동 정리
+    cutoff = now_utc.strftime('%Y-%m-%d')
+    from datetime import timedelta
+    cutoff_date = (now_utc - timedelta(days=30)).strftime('%Y-%m-%d')
+    for old_file in history_dir.glob("*.json"):
+        if old_file.stem < cutoff_date:
+            old_file.unlink()
+            log(f"  🗑 오래된 히스토리 삭제: {old_file.name}")
+
     log(f"\n✅ 저장 완료: {output_path}")
     log(f"   코인: {len(output['coins'])}개")
     log(f"   환율: {usd_krw:.0f}원")
     log(f"   업비트: {len(upbit_prices)}개")
     log(f"   빗썸: {len(bithumb_prices)}개")
     log(f"   코인베이스: {len(coinbase_prices)}개")
+    log(f"   히스토리: {today_file.name} ({len(history_entries)}개 스냅샷)")
 
 
 if __name__ == "__main__":
