@@ -194,6 +194,26 @@ def fetch_coinbase(symbols):
 
 
 # ═══════════════════════════════════════
+# 6. 바이낸스 — USD 가격 (히스토리 기준가용)
+# ═══════════════════════════════════════
+def fetch_binance():
+    """바이낸스 USDT 페어 가격"""
+    log("🌐 바이낸스 가격 조회...")
+    data = safe_get("https://api.binance.com/api/v3/ticker/price")
+    if not data:
+        return {}
+
+    prices = {}
+    for t in data:
+        if t["symbol"].endswith("USDT"):
+            sym = t["symbol"].replace("USDT", "")
+            prices[sym] = round(float(t["price"]), 8)
+
+    log(f"  ✓ 바이낸스 {len(prices)}개 코인")
+    return prices
+
+
+# ═══════════════════════════════════════
 # 메인
 # ═══════════════════════════════════════
 def main():
@@ -232,7 +252,13 @@ def main():
         if sym in coins:
             coins[sym]["coinbase_usd"] = price
 
-    # 6) JSON 저장
+    # 6) 바이낸스
+    binance_prices = fetch_binance()
+    for sym, price in binance_prices.items():
+        if sym in coins:
+            coins[sym]["binance_usd"] = price
+
+    # 7) JSON 저장
     output = {
         "usd_krw": round(usd_krw, 2),
         "coins": list(coins.values()),
@@ -268,6 +294,8 @@ def main():
             entry["bt_krw"] = c["bithumb_krw"]
         if "coinbase_usd" in c:
             entry["cb_usd"] = c["coinbase_usd"]
+        if "binance_usd" in c:
+            entry["bn_usd"] = c["binance_usd"]
         if entry:
             snap_coins[sym] = entry
 
@@ -296,6 +324,7 @@ def main():
     log(f"   업비트: {len(upbit_prices)}개")
     log(f"   빗썸: {len(bithumb_prices)}개")
     log(f"   코인베이스: {len(coinbase_prices)}개")
+    log(f"   바이낸스: {len(binance_prices)}개")
     log(f"   히스토리: {today_file.name} ({len(history_entries)}개 스냅샷)")
 
 
