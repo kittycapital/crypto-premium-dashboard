@@ -409,13 +409,15 @@ function renderChart(){
   if(!wrap||wrap.tagName!=='CANVAS'){document.querySelector('.chart-wrap').innerHTML='<canvas id="mainChart"></canvas>';wrap=document.getElementById('mainChart');}
 
   var labels=filtered.map(function(h){var d=new Date(h.timestamp);return(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');});
-  var upData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.up_krw||!co.cb_usd||!h.usd_krw)return null;return((co.up_krw/h.usd_krw-co.cb_usd)/co.cb_usd*100);});
-  var btData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.bt_krw||!co.cb_usd||!h.usd_krw)return null;return((co.bt_krw/h.usd_krw-co.cb_usd)/co.cb_usd*100);});
+  var upData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.up_krw||!h.usd_krw)return null;var bn=co.bn_usd;if(!bn){if(co.cb_usd)bn=co.cb_usd;else return null;}return((co.up_krw/h.usd_krw-bn)/bn*100);});
+  var btData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.bt_krw||!h.usd_krw)return null;var bn=co.bn_usd;if(!bn){if(co.cb_usd)bn=co.cb_usd;else return null;}return((co.bt_krw/h.usd_krw-bn)/bn*100);});
+  var cbData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.cb_usd)return null;var bn=co.bn_usd;if(!bn)return null;return((co.cb_usd-bn)/bn*100);});
 
   if(mainChart)mainChart.destroy();
   mainChart=new Chart(wrap,{type:'line',data:{labels:labels,datasets:[
     {label:'업비트',data:upData,borderColor:'#00e5cc',backgroundColor:'rgba(0,229,204,0.08)',fill:false,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,spanGaps:true},
     {label:'빗썸',data:btData,borderColor:'#a855f7',backgroundColor:'rgba(168,85,247,0.08)',fill:false,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,spanGaps:true},
+    {label:'코인베이스',data:cbData,borderColor:'#ff8c42',backgroundColor:'rgba(255,140,66,0.08)',fill:false,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,spanGaps:true},
     {label:'0%',data:filtered.map(function(){return 0;}),borderColor:'rgba(255,255,255,0.25)',borderDash:[5,5],pointRadius:0,borderWidth:1.5,fill:false}
   ]},options:{interaction:{intersect:false,mode:'index'},
     plugins:{legend:{labels:{boxWidth:10,padding:12,font:{size:10},color:'#6e6e88',filter:function(i){return i.text!=='0%';}}},
