@@ -65,6 +65,7 @@ def fetch_coingecko():
     for c in all_coins:
         sym = c.get("symbol", "").upper()
         coins[sym] = {
+            "coin_id": c.get("id", ""),
             "symbol": sym,
             "name": c.get("name", sym),
             "image": c.get("image", ""),
@@ -72,6 +73,60 @@ def fetch_coingecko():
         }
     log(f"  → 총 {len(coins)}개 코인")
     return coins
+
+
+# ═══════════════════════════════════════
+# 1b. 거래소 매핑 로드
+# ═══════════════════════════════════════
+def load_exchange_map():
+    """exchange_map.json 로드 — 심볼 충돌 방지용"""
+    map_path = DATA_DIR / "exchange_map.json"
+    if not map_path.exists():
+        log("⚠ exchange_map.json 없음 — 수동 충돌 목록 사용")
+        return None
+    try:
+        with open(map_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        exchanges = data.get("exchanges", {})
+        total = sum(len(m) for m in exchanges.values())
+        log(f"✓ exchange_map.json 로드: {total}개 매핑")
+        return exchanges
+    except Exception as e:
+        log(f"⚠ exchange_map.json 로드 실패: {e}")
+        return None
+
+
+# 수동 충돌 목록 (exchange_map.json 없을 때 폴백)
+# {symbol: {exchange: coingecko_coin_id}} — 거래소와 CoinGecko가 다른 코인인 경우
+KNOWN_CONFLICTS = {
+    "LIT": {"coingecko": "lighter", "bithumb": "litentry"},
+    "MNT": {"coingecko": "mantle", "coinbase": "terra-luna"},  # Coinbase MNT ≠ Mantle
+}
+
+
+def is_valid_match(exchange_name, symbol, coin_id, exchange_map):
+    """거래소 심볼이 CoinGecko coin_id와 일치하는지 검증"""
+    # 1) exchange_map.json 기반 검증
+    if exchange_map is not None:
+        ex_map = exchange_map.get(exchange_name, {})
+        if symbol in ex_map:
+            mapped_id = ex_map[symbol]
+            if mapped_id != coin_id:
+                log(f"  ✗ 심볼 충돌: {exchange_name}/{symbol} → {mapped_id} ≠ CoinGecko/{coin_id}")
+                return False
+            return True
+        return True  # 매핑에 없는 심볼은 통과
+
+    # 2) 폴백: 수동 충돌 목록
+    if symbol in KNOWN_CONFLICTS:
+        conflict = KNOWN_CONFLICTS[symbol]
+        cg_id = conflict.get("coingecko", "")
+        ex_id = conflict.get(exchange_name, "")
+        if ex_id and cg_id and ex_id != cg_id:
+            log(f"  ✗ 알려진 충돌: {exchange_name}/{symbol} → {ex_id} ≠ CoinGecko/{cg_id}")
+            return False
+
+    return True
 
 
 # ═══════════════════════════════════════
@@ -232,25 +287,46 @@ def main():
     # 2) 환율
     usd_krw = fetch_usd_krw()
 
+    # 2b) 거래소 매핑 로드
+    exchange_map = load_exchange_map()
+
     # 3) 업비트
     upbit_prices = fetch_upbit(symbols)
+    skipped = 0
     for sym, price in upbit_prices.items():
         if sym in coins:
-            coins[sym]["upbit_krw"] = price
+            if is_valid_match("upbit", sym, coins[sym]["coin_id"], exchange_map):
+                coins[sym]["upbit_krw"] = price
+            else:
+                skipped += 1
+    if skipped:
+        log(f"  ⚠ 업비트 {skipped}개 심볼 충돌 건너뜀")
 
     # 4) 빗썸
     bithumb_prices = fetch_bithumb(symbols)
+    skipped = 0
     for sym, price in bithumb_prices.items():
         if sym in coins:
-            coins[sym]["bithumb_krw"] = price
+            if is_valid_match("bithumb", sym, coins[sym]["coin_id"], exchange_map):
+                coins[sym]["bithumb_krw"] = price
+            else:
+                skipped += 1
+    if skipped:
+        log(f"  ⚠ 빗썸 {skipped}개 심볼 충돌 건너뜀")
 
     # 5) 코인베이스 (주요 코인만 — rate limit 때문에)
     # 마켓캡 상위 50개만
     top_symbols = sorted(symbols, key=lambda s: coins[s].get("market_cap_rank", 999))[:50]
     coinbase_prices = fetch_coinbase(top_symbols)
+    skipped = 0
     for sym, price in coinbase_prices.items():
         if sym in coins:
-            coins[sym]["coinbase_usd"] = price
+            if is_valid_match("coinbase", sym, coins[sym]["coin_id"], exchange_map):
+                coins[sym]["coinbase_usd"] = price
+            else:
+                skipped += 1
+    if skipped:
+        log(f"  ⚠ 코인베이스 {skipped}개 심볼 충돌 건너뜀")
 
     # 6) 바이낸스
     binance_prices = fetch_binance()
@@ -258,10 +334,15 @@ def main():
         if sym in coins:
             coins[sym]["binance_usd"] = price
 
-    # 7) JSON 저장
+    # 7) JSON 저장 (coin_id는 내부용이므로 제거)
+    clean_coins = []
+    for c in coins.values():
+        cc = {k: v for k, v in c.items() if k != "coin_id"}
+        clean_coins.append(cc)
+
     output = {
         "usd_krw": round(usd_krw, 2),
-        "coins": list(coins.values()),
+        "coins": clean_coins,
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
 
