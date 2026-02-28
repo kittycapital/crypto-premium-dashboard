@@ -365,7 +365,19 @@ def main():
         except (json.JSONDecodeError, Exception):
             history_entries = []
 
-    # 스냅샷 생성: {timestamp, usd_krw, coins: {SYM: {up_krw, bt_krw, cb_usd}}}
+    # 스냅샷 생성: {timestamp, usd_krw, coins: {SYM: {up_krw, bt_krw, cb_usd, ref_usd}}}
+    # 기준가(ref_usd): binance > coinbase > KRW역산 순으로 결정
+    ref_prices = {}
+    for sym, c in coins.items():
+        if "binance_usd" in c:
+            ref_prices[sym] = c["binance_usd"]
+        elif "coinbase_usd" in c:
+            ref_prices[sym] = c["coinbase_usd"]
+        elif "upbit_krw" in c and usd_krw > 0:
+            ref_prices[sym] = round(c["upbit_krw"] / usd_krw, 6)
+        elif "bithumb_krw" in c and usd_krw > 0:
+            ref_prices[sym] = round(c["bithumb_krw"] / usd_krw, 6)
+
     snap_coins = {}
     for sym, c in coins.items():
         entry = {}
@@ -377,6 +389,8 @@ def main():
             entry["cb_usd"] = c["coinbase_usd"]
         if "binance_usd" in c:
             entry["bn_usd"] = c["binance_usd"]
+        if sym in ref_prices:
+            entry["ref_usd"] = ref_prices[sym]
         if entry:
             snap_coins[sym] = entry
 
