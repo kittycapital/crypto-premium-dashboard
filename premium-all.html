@@ -409,9 +409,11 @@ function renderChart(){
   if(!wrap||wrap.tagName!=='CANVAS'){document.querySelector('.chart-wrap').innerHTML='<canvas id="mainChart"></canvas>';wrap=document.getElementById('mainChart');}
 
   var labels=filtered.map(function(h){var d=new Date(h.timestamp);return(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');});
-  var upData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.up_krw||!h.usd_krw)return null;var bn=co.bn_usd;if(!bn){if(co.cb_usd)bn=co.cb_usd;else return null;}return((co.up_krw/h.usd_krw-bn)/bn*100);});
-  var btData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.bt_krw||!h.usd_krw)return null;var bn=co.bn_usd;if(!bn){if(co.cb_usd)bn=co.cb_usd;else return null;}return((co.bt_krw/h.usd_krw-bn)/bn*100);});
-  var cbData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.cb_usd)return null;var bn=co.bn_usd;if(!bn)return null;return((co.cb_usd-bn)/bn*100);});
+  /* 기준가: bn_usd > ref_usd > cb_usd 순 */
+  function getRef(co){return co.bn_usd||co.ref_usd||co.cb_usd||null;}
+  var upData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.up_krw||!h.usd_krw)return null;var bn=getRef(co);if(!bn)return null;return((co.up_krw/h.usd_krw-bn)/bn*100);});
+  var btData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.bt_krw||!h.usd_krw)return null;var bn=getRef(co);if(!bn)return null;return((co.bt_krw/h.usd_krw-bn)/bn*100);});
+  var cbData=filtered.map(function(h){var co=h.coins[selectedCoin];if(!co||!co.cb_usd)return null;var bn=getRef(co);if(!bn)return null;return((co.cb_usd-bn)/bn*100);});
 
   if(mainChart)mainChart.destroy();
   mainChart=new Chart(wrap,{type:'line',data:{labels:labels,datasets:[
