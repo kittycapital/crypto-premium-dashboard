@@ -96,17 +96,42 @@ def load_exchange_map():
         return None
 
 
-# 수동 충돌 목록 (exchange_map.json 없을 때 폴백)
-# {symbol: {exchange: coingecko_coin_id}} — 거래소와 CoinGecko가 다른 코인인 경우
-KNOWN_CONFLICTS = {
-    "LIT": {"coingecko": "lighter", "bithumb": "litentry"},
-    "MNT": {"coingecko": "mantle", "coinbase": "terra-luna"},  # Coinbase MNT ≠ Mantle
+# ═══════════════════════════════════════
+# 수동 오버라이드 (exchange_map.json보다 우선)
+# CoinGecko API 매핑 오류를 수동으로 보정
+# 형식: {거래소: {심볼: 올바른_coin_id 또는 False(차단)}}
+#   - coin_id 지정: 해당 coin_id와 일치할 때만 통과
+#   - False: 무조건 차단 (거래소에서 다른 코인을 거래하는 경우)
+# ═══════════════════════════════════════
+MANUAL_OVERRIDES = {
+    "bithumb": {
+        "LIT": False,       # 빗썸 LIT = Litentry, CoinGecko TOP200 LIT = Lighter → 차단
+    },
+    "upbit": {},
+    "coinbase": {
+        "MNT": False,       # 코인베이스 MNT ≠ Mantle → 차단
+    },
 }
 
 
 def is_valid_match(exchange_name, symbol, coin_id, exchange_map):
-    """거래소 심볼이 CoinGecko coin_id와 일치하는지 검증"""
-    # 1) exchange_map.json 기반 검증
+    """거래소 심볼이 CoinGecko coin_id와 일치하는지 검증
+    우선순위: MANUAL_OVERRIDES > exchange_map.json > 기본 통과
+    """
+    # 1) 수동 오버라이드 — 최우선
+    overrides = MANUAL_OVERRIDES.get(exchange_name, {})
+    if symbol in overrides:
+        override_val = overrides[symbol]
+        if override_val is False:
+            log(f"  ✗ 수동 차단: {exchange_name}/{symbol} (CoinGecko/{coin_id}와 다른 코인)")
+            return False
+        # 특정 coin_id만 허용
+        if override_val != coin_id:
+            log(f"  ✗ 수동 불일치: {exchange_name}/{symbol} → {override_val} ≠ CoinGecko/{coin_id}")
+            return False
+        return True
+
+    # 2) exchange_map.json 기반 검증
     if exchange_map is not None:
         ex_map = exchange_map.get(exchange_name, {})
         if symbol in ex_map:
@@ -116,15 +141,6 @@ def is_valid_match(exchange_name, symbol, coin_id, exchange_map):
                 return False
             return True
         return True  # 매핑에 없는 심볼은 통과
-
-    # 2) 폴백: 수동 충돌 목록
-    if symbol in KNOWN_CONFLICTS:
-        conflict = KNOWN_CONFLICTS[symbol]
-        cg_id = conflict.get("coingecko", "")
-        ex_id = conflict.get(exchange_name, "")
-        if ex_id and cg_id and ex_id != cg_id:
-            log(f"  ✗ 알려진 충돌: {exchange_name}/{symbol} → {ex_id} ≠ CoinGecko/{cg_id}")
-            return False
 
     return True
 
