@@ -27,5 +27,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
           git diff --staged --quiet || git commit -m "📊 프리미엄 스냅샷 $(date -u '+%Y-%m-%d %H:%M') UTC"
-          git pull --rebase
+          git pull origin main --no-rebase -X theirs
           git push
