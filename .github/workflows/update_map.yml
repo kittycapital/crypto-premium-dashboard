@@ -1,13 +1,13 @@
-name: Update Premium Data
+name: Update Exchange Map
 on:
   schedule:
-    # 6시간 간격 (UTC 00, 06, 12, 18시 = KST 09, 15, 21, 03시)
-    - cron: '0 */6 * * *'
+    # 매주 월요일 00:00 UTC
+    - cron: '0 0 * * 1'
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  update-data:
+  update-map:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,14 +18,14 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install requests
-      - name: Fetch Premium Data
-        run: python fetch_premium.py
-        timeout-minutes: 5
+      - name: Generate Exchange Map
+        run: python generate_exchange_map.py
+        timeout-minutes: 10
       - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --staged --quiet || git commit -m "📊 프리미엄 스냅샷 $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git add data/exchange_map.json
+          git diff --staged --quiet || git commit -m "🗺️ 거래소 매핑 업데이트 $(date -u '+%Y-%m-%d')"
           git pull origin main --no-rebase -X theirs
           git push
