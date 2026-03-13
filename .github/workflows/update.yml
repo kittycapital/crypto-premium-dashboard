@@ -1,8 +1,8 @@
 name: Update Premium Data
 on:
   schedule:
-    # 6시간 간격 (UTC 00, 06, 12, 18시 = KST 09, 15, 21, 03시)
-    - cron: '0 */6 * * *'
+   # 12시간 간격 (UTC 00, 12시 = KST 09, 21시)
+    - cron: '0 */12 * * *'
   workflow_dispatch:
 permissions:
   contents: write
