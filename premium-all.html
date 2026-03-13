@@ -255,7 +255,7 @@ body::-webkit-scrollbar{display:none}
     <div class="card s12">
       <div class="card-label">ALL COINS</div>
       <div class="card-title">전체 코인 프리미엄</div>
-      <div class="card-desc">기준: Binance USDT (실시간) · 프리미엄 = (거래소 − Binance) / Binance × 100</div>
+      <div class="card-desc">기준: Binance USDT (실시간) · 업비트/빗썸 실시간 · 프리미엄 = (거래소 − Binance) / Binance × 100</div>
       <div class="search-wrap">
         <span class="search-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <input type="text" class="search-input" id="coinSearch" placeholder="코인 검색 (이름 또는 심볼)" autocomplete="off">
@@ -302,7 +302,7 @@ Chart.defaults.responsive=true;Chart.defaults.maintainAspectRatio=false;
 var gridColor='rgba(255,255,255,0.04)';
 
 /* ===== DATA ===== */
-var serverCoins=[],usdKrw=0,binancePrices={},premiums=[],historyData=[];
+var serverCoins=[],usdKrw=0,binancePrices={},upbitLive={},bithumbLive={},premiums=[],historyData=[];
 var selectedCoin='BTC',mainChart=null,sortState={col:'rank',dir:'asc'},searchQuery='',refreshTimer=30,chartPeriod=1;
 var MAJORS=['BTC','ETH','XRP','BNB','SOL'];
 var STABLECOINS=['USDT','USDC','DAI','TUSD','BUSD','FDUSD','PYUSD','USDD','FRAX','LUSD','GUSD','USDP','USDE','SUSDE','EURC'];
@@ -325,14 +325,55 @@ async function fetchBinance(){
   }catch(e){document.getElementById('sBn').textContent='✗ 차단';document.getElementById('sBn').className='fl';return false;}
 }
 
+async function fetchUpbitLive(){
+  try{
+    var mr=await fetch('https://api.upbit.com/v1/market/all?isDetails=false');if(!mr.ok)return false;
+    var markets=await mr.json();
+    var krwCodes=markets.filter(function(m){return m.market.startsWith('KRW-');}).map(function(m){return m.market;});
+    upbitLive={};
+    for(var i=0;i<krwCodes.length;i+=100){
+      var batch=krwCodes.slice(i,i+100);
+      var tr=await fetch('https://api.upbit.com/v1/ticker?markets='+batch.join(','));
+      if(tr.ok){var td=await tr.json();td.forEach(function(t){upbitLive[t.market.replace('KRW-','')]=t.trade_price;});}
+    }
+    return true;
+  }catch(e){return false;}
+}
+
+async function fetchBithumbLive(){
+  try{
+    var r=await fetch('https://api.bithumb.com/public/ticker/ALL_KRW');if(!r.ok)return false;
+    var d=await r.json();if(d.status!=='0000')return false;
+    bithumbLive={};var tickers=d.data;
+    Object.keys(tickers).forEach(function(sym){
+      if(typeof tickers[sym]==='object'&&tickers[sym].closing_price){
+        bithumbLive[sym]=parseFloat(tickers[sym].closing_price);
+      }
+    });
+    return true;
+  }catch(e){return false;}
+}
+
+async function fetchLiveRate(){
+  try{
+    var r=await fetch('https://open.er-api.com/v6/latest/USD');if(!r.ok)return;
+    var d=await r.json();if(d.rates&&d.rates.KRW){usdKrw=d.rates.KRW;document.getElementById('rateDisplay').textContent=usdKrw.toFixed(0)+'원';}
+  }catch(e){}
+}
+
 function calculate(){
   premiums=[];
   for(var i=0;i<serverCoins.length;i++){
     var coin=serverCoins[i],sym=coin.symbol,bn=binancePrices[sym];
     if(!bn||bn<=0){if(STABLECOINS.indexOf(sym)!==-1)bn=1.0;else continue;}
     var e={symbol:sym,name:coin.name||sym,image:coin.image||'',rank:coin.market_cap_rank||999,bn_usd:bn};
-    if(coin.upbit_krw&&usdKrw>0){e.up_krw=coin.upbit_krw;e.up_prem=((coin.upbit_krw/usdKrw)-bn)/bn*100;}
-    if(coin.bithumb_krw&&usdKrw>0){e.bt_krw=coin.bithumb_krw;e.bt_prem=((coin.bithumb_krw/usdKrw)-bn)/bn*100;}
+    /* 업비트: 실시간 우선, 서버 데이터 폴백 */
+    var upKrw=upbitLive[sym]||coin.upbit_krw;
+    if(upKrw&&usdKrw>0){e.up_krw=upKrw;e.up_prem=((upKrw/usdKrw)-bn)/bn*100;}
+    /* 빗썸: 실시간 우선, 서버 데이터 폴백 */
+    var btKrw=bithumbLive[sym]||coin.bithumb_krw;
+    if(btKrw&&usdKrw>0){e.bt_krw=btKrw;e.bt_prem=((btKrw/usdKrw)-bn)/bn*100;}
+    /* 코인베이스: 서버 데이터 사용 (벌크 API 없음) */
     if(coin.coinbase_usd){var cp=(coin.coinbase_usd-bn)/bn*100;if(Math.abs(cp)<=10){e.cb_usd=coin.coinbase_usd;e.cb_prem=cp;}}
     var vals=[e.up_prem,e.bt_prem,e.cb_prem].filter(function(v){return v!=null;});
     if(vals.length>0){e.max_prem=Math.max.apply(null,vals);e.min_prem=Math.min.apply(null,vals);}
@@ -484,8 +525,8 @@ document.querySelectorAll('#periodTabs .tab').forEach(function(t){
 });
 
 /* REFRESH */
-async function refresh(){await fetchBinance();calculate();renderMajors();renderAvg();renderChart();renderTable();refreshTimer=30;sendHeight();}
-async function init(){await loadServerData();loadHistory();await refresh();setInterval(function(){refreshTimer--;document.getElementById('countdown').textContent=refreshTimer+'s';if(refreshTimer<=0)refresh();},1000);setInterval(loadServerData,300000);}
+async function refresh(){await Promise.all([fetchBinance(),fetchUpbitLive(),fetchBithumbLive()]);calculate();renderMajors();renderAvg();renderChart();renderTable();refreshTimer=30;sendHeight();}
+async function init(){await loadServerData();await fetchLiveRate();loadHistory();await refresh();setInterval(function(){refreshTimer--;document.getElementById('countdown').textContent=refreshTimer+'s';if(refreshTimer<=0)refresh();},1000);setInterval(loadServerData,300000);setInterval(fetchLiveRate,600000);}
 
 /* IFRAME RESIZE */
 var _lastH=0,_ht,_frameId='hvPremiumAll';
@@ -496,12 +537,6 @@ new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:t
 setInterval(sendHeight,2000);
 
 init();
-</script>
-<script>
-function sendHeight(){var h=document.documentElement.scrollHeight;window.parent.postMessage({id:'hvPremiumAll',height:h},'*')}
-window.addEventListener('load',function(){sendHeight();setTimeout(sendHeight,500);setTimeout(sendHeight,1500)});
-window.addEventListener('resize',sendHeight);
-new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true,attributes:true});
 </script>
 </body>
 </html>
